@@ -1,3 +1,4 @@
+package buscaminas;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -16,6 +17,8 @@ import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.lang.reflect.Array;
+
 import javax.swing.SwingConstants;
 import java.awt.FlowLayout;
 
@@ -24,6 +27,7 @@ public class PantallaInicial extends JFrame implements ActionListener {
 	/**
 	 * 
 	 */
+	private static PantallaInicial miPantallaInicial = new PantallaInicial();
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JPanel panel;
@@ -41,6 +45,8 @@ public class PantallaInicial extends JFrame implements ActionListener {
 	private JPanel panel_5;
 	private JRadioButton rdbtnAvanzado;
 	private JPanel panel_6;
+	private String dificultad;
+	String [] args = new String[100];
 
 	/**
 	 * Launch the application.
@@ -155,7 +161,7 @@ public class PantallaInicial extends JFrame implements ActionListener {
 		}
 		return textField;
 	}
-	private JLabel getLblDificultad() {
+	public JLabel getLblDificultad() {
 		if (lblDificultad == null) {
 			lblDificultad = new JLabel("Dificultad:");
 			lblDificultad.setFont(new Font("Comic Sans MS", Font.BOLD, 17));
@@ -192,11 +198,41 @@ public class PantallaInicial extends JFrame implements ActionListener {
 		}
 		return panel_4;
 	}
+	public void actionPerformed(ActionEvent e) {
+		
+		if (getNombreJugador().equals("") && e.getSource().equals(btnJugar)){
+			JOptionPane.showMessageDialog(rootPane, "Tienes que meter un nombre de usuario antes de escoger la dificultad.");
+		}else{
+				if (rdbtnFacil.isSelected() && e.getSource().equals(btnJugar)){
+					this.setVisible(false);
+					dificultad = "Facil";
+					System.out.println("Dificultad elegida FACIL");
+					args[0] = "Facil";
+					InterfazTablero.main(args); 
+				}else if(rdbtnMedio.isSelected() && e.getSource().equals(btnJugar)){
+					this.setVisible(false);
+					dificultad = "Media";
+					System.out.println("Dificultad elegida MEDIA");
+					args[0] = "Media";
+					InterfazTablero.main(args); 
+				}else if(rdbtnAvanzado.isSelected() && e.getSource().equals(btnJugar)){
+					this.setVisible(false);
+					dificultad = "Avanzada";
+					System.out.println("Dificultad elegida AVANZADA");
+					args[0] = "Avanzada";
+					InterfazTablero.main(args); 
+					}
+				this.getNombreJugador();
+				//Eliminar esta linea es para comprobar que pilla el nombre
+			}
+		}
+	
 	private JButton getBtnJugar() {
 		if (btnJugar == null) {
 			btnJugar = new JButton("Jugar!");
 			btnJugar.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 			btnJugar.addActionListener(this);
+			
 		}
 		return btnJugar;
 	}
@@ -207,34 +243,30 @@ public class PantallaInicial extends JFrame implements ActionListener {
 		return panel_5;
 	}
 	
-	public void actionPerformed(ActionEvent e) {
-		if (getNombreJugador().equals("") && e.getSource().equals(btnJugar)){
-			JOptionPane.showMessageDialog(rootPane, "Tienes que meter un nombre de usuario antes de escoger la dificultad.");
-		}else{
-				if (rdbtnFacil.isSelected() && e.getSource().equals(btnJugar)){
-					this.setVisible(false);
-					System.out.println("Dificultad elegida FACIL");
-				}else if(rdbtnMedio.isSelected() && e.getSource().equals(btnJugar)){
-					this.setVisible(false);
-					System.out.println("Dificultad elegida MEDIA");
-				}else if(rdbtnAvanzado.isSelected() && e.getSource().equals(btnJugar)){
-					this.setVisible(false);
-					System.out.println("Dificultad elegida AVANZADA");
-					}
-				this.getNombreJugador(); //Eliminar esta linea es para comprobar que pilla el nombre
-			}
-		}
-		
-	
+
 	public String getNombreJugador(){
-		System.out.println(getTextField().getText());
+		//System.out.println(getTextField().getText());
 		return getTextField().getText();
 	}
-	
+	public String getDificultad(){
+		System.out.println(dificultad);
+		return this.dificultad;
+	}
 	private JPanel getPanel_6() {
 		if (panel_6 == null) {
 			panel_6 = new JPanel();
 		}
 		return panel_6;
 	}
-}
+
+	public static PantallaInicial getMiPantallaInicial() {
+		if (miPantallaInicial == null){
+			miPantallaInicial  = new PantallaInicial();
+		}
+			return miPantallaInicial;
+		
+	}
+
+	
+	}
+
