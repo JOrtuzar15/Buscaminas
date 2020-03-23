@@ -26,9 +26,6 @@ public class InterfazTablero extends JFrame {
 	public  String [][] elArray;
 	private String dificultad;
 	
-	
-
-	
 
 	public InterfazTablero(String pdificultad) {
 		this.dificultad = pdificultad;
@@ -133,11 +130,5 @@ public class InterfazTablero extends JFrame {
 	         }
 	 
 	 }
-
-	
-
-
-
-	
 	
 }
