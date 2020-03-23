@@ -2,8 +2,8 @@ public class Casilla {
 	private Estado estado;
 	private int infoCasilla;
 	
-	public Casilla(Estado est,int info) {
-		this.estado=est;
+	public Casilla(int info) {
+		this.estado=new Tapado();
 		this.infoCasilla=info;
 	}
 	public int clickIzq() {
