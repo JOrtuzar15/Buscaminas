@@ -9,7 +9,7 @@ public class Casilla {
 	public int clickIzq() {
 		return this.estado.clickIzq(this);
 	}
-	public int clickDer() {
+	public void clickDer() {
 		this.estado.clickDer(this);
 	}
 	public void cambiarEstado(Estado pEstado) {
