@@ -7,10 +7,10 @@ public class Casilla {
 		this.infoCasilla=info;
 	}
 	public int clickIzq() {
-		this.estado.clickIzq(this);
+		return this.estado.clickIzq(this);
 	}
 	public int clickDer() {
-		this.estado.clickDer(this);
+		return this.estado.clickDer(this);
 	}
 	public void cambiarEstado(Estado pEstado) {
 		this.estado=pEstado;
