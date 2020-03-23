@@ -9,10 +9,13 @@ public class Casilla {
 	public int clickIzq() {
 		return this.estado.clickIzq(this);
 	}
-	public void clickDer() {
-		this.estado.clickDer(this);
+	public int clickDer() {
+		return this.estado.clickDer(this);
 	}
 	public void cambiarEstado(Estado pEstado) {
 		this.estado=pEstado;
+	}
+	public int getInfoCasilla() {
+		return this.infoCasilla;
 	}
 }
