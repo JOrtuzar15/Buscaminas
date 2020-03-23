@@ -29,21 +29,7 @@ public class InterfazTablero extends JFrame {
 	
 
 	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					InterfazTablero frame = new InterfazTablero(args[0]);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
-	
-	
 	public InterfazTablero(String pdificultad) {
 		this.dificultad = pdificultad;
 		this.setDimensiones();
@@ -71,6 +57,7 @@ public class InterfazTablero extends JFrame {
 		gbc_panel_2.gridx = 0;
 		gbc_panel_2.gridy = 1;
 		contentPane.add(getPanel_2(), gbc_panel_2);
+		this.setVisible(true);
 		
 	}
 	

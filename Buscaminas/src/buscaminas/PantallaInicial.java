@@ -27,7 +27,6 @@ public class PantallaInicial extends JFrame implements ActionListener {
 	/**
 	 * 
 	 */
-	private static PantallaInicial miPantallaInicial = new PantallaInicial();
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JPanel panel;
@@ -46,11 +45,9 @@ public class PantallaInicial extends JFrame implements ActionListener {
 	private JRadioButton rdbtnAvanzado;
 	private JPanel panel_6;
 	private String dificultad;
-	String [] args = new String[100];
 
-	/**
-	 * Launch the application.
-	 */
+
+	// HAY QUE QUITAR EL MAIN Y HACER LLAMADA A LA CONSTRUCTORA
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -64,9 +61,6 @@ public class PantallaInicial extends JFrame implements ActionListener {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public PantallaInicial() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -207,20 +201,17 @@ public class PantallaInicial extends JFrame implements ActionListener {
 					this.setVisible(false);
 					dificultad = "Facil";
 					System.out.println("Dificultad elegida FACIL");
-					args[0] = "Facil";
-					InterfazTablero.main(args); 
+					InterfazTablero t = new InterfazTablero(dificultad);
 				}else if(rdbtnMedio.isSelected() && e.getSource().equals(btnJugar)){
 					this.setVisible(false);
 					dificultad = "Media";
 					System.out.println("Dificultad elegida MEDIA");
-					args[0] = "Media";
-					InterfazTablero.main(args); 
+					InterfazTablero t = new InterfazTablero(dificultad);
 				}else if(rdbtnAvanzado.isSelected() && e.getSource().equals(btnJugar)){
 					this.setVisible(false);
 					dificultad = "Avanzada";
 					System.out.println("Dificultad elegida AVANZADA");
-					args[0] = "Avanzada";
-					InterfazTablero.main(args); 
+					InterfazTablero t = new InterfazTablero(dificultad);
 					}
 				this.getNombreJugador();
 				//Eliminar esta linea es para comprobar que pilla el nombre
@@ -245,13 +236,10 @@ public class PantallaInicial extends JFrame implements ActionListener {
 	
 
 	public String getNombreJugador(){
-		//System.out.println(getTextField().getText());
+		System.out.println(getTextField().getText());
 		return getTextField().getText();
 	}
-	public String getDificultad(){
-		System.out.println(dificultad);
-		return this.dificultad;
-	}
+	
 	private JPanel getPanel_6() {
 		if (panel_6 == null) {
 			panel_6 = new JPanel();
@@ -259,14 +247,5 @@ public class PantallaInicial extends JFrame implements ActionListener {
 		return panel_6;
 	}
 
-	public static PantallaInicial getMiPantallaInicial() {
-		if (miPantallaInicial == null){
-			miPantallaInicial  = new PantallaInicial();
-		}
-			return miPantallaInicial;
-		
-	}
-
-	
 	}
 
