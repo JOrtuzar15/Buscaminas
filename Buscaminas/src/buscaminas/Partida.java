@@ -31,7 +31,7 @@ public class Partida extends Observable{
 	}
 	
 	private void terminar(){
-		PantallaFinal pf = new PantallaFinal();
+		
 	}
 	
 	public void reset(){
@@ -40,12 +40,26 @@ public class Partida extends Observable{
 	}
 	
 	public void clicar(int pX, int pY, int pClick){
-		if(
-		this.tablero.clicar(pX,pY,pClick) != 9) {
+		int res=this.tablero.clicar(pX,pY,pClick);
+		if((res != 9)) {
 			int[] lista = new int[3];
 			lista[0] = pX;
 			lista[1] = pY;
-			lista[2] = pClick;
+			lista[2] = res;
+			
+			if (res==0) {
+				this.clicar(pX-1, pY-1, pClick);
+				this.clicar(pX-1, pY, pClick);
+				this.clicar(pX-1, pY+1, pClick);
+				this.clicar(pX, pY-1, pClick);
+				this.clicar(pX, pY+1, pClick);
+				this.clicar(pX+1, pY-1, pClick);
+				this.clicar(pX+1, pY, pClick);
+				this.clicar(pX+1, pY+1, pClick);
+			}
+			else if(res==-1) {
+				this.terminar;
+			}
 			
 			this.notify(lista);
 		}

@@ -1,4 +1,4 @@
-package Buscaminas;
+package buscaminas;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -24,8 +24,8 @@ public class InterfazTablero extends JFrame implements Observer {
 	private JPanel panel_2;
 	private int ancho;
 	private int alto;
-	public  JButton [][] Botones;
-	public  String [][] elArray;
+	public  JButton [][] Botones; //Matriz de botones
+	public  String [][] elArray; //Matriz de String subyacente a la matriz de botones
 	private String dificultad;
 	
 
@@ -131,7 +131,25 @@ public class InterfazTablero extends JFrame implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		
-		int[] coordenadas = (int []) arg;
+		Integer[] coordenadas = (Integer []) arg;
+		if (coordenadas[2]==10) {
+			//Mostrar casilla vacia
+		}
+		else if (coordenadas[2]==11) {
+			//Poner banderin en coordenadas especificadas
+		}
+		else if (coordenadas[2]==-1) {
+			//Has perdido
+			
+		}
+		else if (coordenadas[2]==0){
+			//Mostrar casilla vacia
+			Botones[coordenadas[0]][coordenadas[1]].setEnabled(false);
+		}
+		else {
+			elArray[coordenadas[0]][coordenadas[1]]=coordenadas[2].toString();
+			Botones[coordenadas[0]][coordenadas[1]].setEnabled(false);
+		}
 	}
 	
 	
