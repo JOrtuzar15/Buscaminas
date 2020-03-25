@@ -4,11 +4,13 @@ public class Tapado implements Estado{
 	public Tapado() {
 		
 	}
-	public void clickIzq(Casilla pCasilla) {
+	public int clickIzq(Casilla pCasilla) {
 		pCasilla.cambiarEstado(new Destapado());
+		return pCasilla.getInfoCasilla();
 	}
 	
-	public void clickDer(Casilla pCasilla) {
-		
+	public int clickDer(Casilla pCasilla) { //Devuelve 11, colocar banderin
+		pCasilla.cambiarEstado(new Marcado());
+		return 11;
 	}
 }

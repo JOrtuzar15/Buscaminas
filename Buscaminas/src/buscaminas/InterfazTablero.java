@@ -6,6 +6,8 @@ import java.awt.EventQueue;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.Observable;
+import java.util.Observer;
 import java.awt.event.ActionEvent;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -13,7 +15,7 @@ import java.awt.GridLayout;
 import javax.swing.border.EmptyBorder;
 import java.awt.Insets;
  
-public class InterfazTablero extends JFrame {
+public class InterfazTablero extends JFrame implements Observer {
 	
 	
 	private JPanel contentPane;
@@ -63,19 +65,9 @@ public class InterfazTablero extends JFrame {
 		if (dificultad.equals("Facil")){
 			this.alto=7;
 		    this.ancho=10;
-		    Botones =new JButton [ancho][alto];
-		    Tablero t = new Tablero(ancho ,alto);
-		    t.generarCasillas(5);
-		    elArray = new String [ancho][alto];
-		   
-		    Casilla[][] lista = t.getCasilla();
-		    System.out.println(lista.length);
-		    for (int i=0;i<ancho;i++){
-			       for (int z=0;z<alto;z++){
-			    	   elArray[i][z] = lista[i][z].getInfoCasilla() ;
-			       }
-		    }
-		    elArray[2][2] = "s";
+		    Botones = new JButton[ancho][alto];
+		    
+		    
 		    
 		}else if(dificultad.equals("Media")){
 			this.alto=10;
@@ -120,7 +112,7 @@ public class InterfazTablero extends JFrame {
 		       for (int i=0;i<ancho;i++){
 		             for (int z=0;z<alto;z++){
 		             if (ar.getSource()==Botones[i][z]){
-		                  mostrarCasilla(i,z);
+		                 Partida.getMiPartida().clicar(i,z,1);
 		  
 		             }                }        }            }               }             );  
 		}
@@ -134,6 +126,13 @@ public class InterfazTablero extends JFrame {
 	    
 	 
 	 }
+	
+
+	@Override
+	public void update(Observable o, Object arg) {
+		
+		int[] coordenadas = (int []) arg;
+	}
 	
 	
 }

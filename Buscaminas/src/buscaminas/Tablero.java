@@ -88,7 +88,20 @@ public class Tablero {
 			       }     
 			   } 
 		 }
-		 public Casilla[][] getCasilla(){
+		 public Casilla[][] getTablero(){
 			 return this.matriz;
 		 }
+		 
+		 public int clicar(int x, int y , int click) {
+			Casilla c = this.matriz[x][y];
+			if(click == 1) {
+				return c.clickIzq();
+			}else {
+				return c.clickDer();
+			}
+			 
+			 
+						 
+		 }
+
 }

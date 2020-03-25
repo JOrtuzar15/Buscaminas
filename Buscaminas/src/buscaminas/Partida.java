@@ -1,6 +1,6 @@
 package Buscaminas;
 
-import java.util.Observable;
+import java.util.*;
 
 public class Partida extends Observable{
 	
@@ -9,8 +9,15 @@ public class Partida extends Observable{
 	private int tiempo;
 	private Tablero tablero;
 	private Ranking ranking;
+	private ArrayList <Observer> listObservadores ;
 	
-	private Partida(){  }
+	private Partida(){ 
+		this.puntuacion = 0;
+		this.tiempo = 0;
+		this.listObservadores = new ArrayList<Observer>();
+		
+		
+	}
  
 	public static Partida getMiPartida(){
 		if (miPartida == null){
@@ -33,6 +40,27 @@ public class Partida extends Observable{
 	}
 	
 	public void clicar(int pX, int pY, int pClick){
-		this.tablero.clicar(pX,pY,pClick);
+		if(
+		this.tablero.clicar(pX,pY,pClick) != 9) {
+			int[] lista = new int[3];
+			lista[0] = pX;
+			lista[1] = pY;
+			lista[2] = pClick;
+			
+			this.notify(lista);
+		}
+		
 	}
+	
+	private void notify(int[] lista) {
+		
+		Iterator<Observer> it = this.listObservadores.iterator();
+		
+		while(it.hasNext()) {
+			Observer o = it.next();
+			o.update(this, lista);
+		}
+	}
+	
+	
 }
