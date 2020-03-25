@@ -1,8 +1,10 @@
+package Buscaminas;
+
 public class Casilla {
 	private Estado estado;
-	private int infoCasilla;
+	private String infoCasilla ;
 	
-	public Casilla(int info) {
+	public Casilla(String info) {
 		this.estado=new Tapado();
 		this.infoCasilla=info;
 	}
@@ -15,7 +17,7 @@ public class Casilla {
 	public void cambiarEstado(Estado pEstado) {
 		this.estado=pEstado;
 	}
-	public int getInfoCasilla() {
+	public String getInfoCasilla() {
 		return this.infoCasilla;
 	}
 }

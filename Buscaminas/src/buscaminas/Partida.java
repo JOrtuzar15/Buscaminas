@@ -1,4 +1,4 @@
-package buscaminas;
+package Buscaminas;
 
 import java.util.Observable;
 

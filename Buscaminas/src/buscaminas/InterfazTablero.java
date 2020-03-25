@@ -1,4 +1,4 @@
-package buscaminas;
+package Buscaminas;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -64,7 +64,19 @@ public class InterfazTablero extends JFrame {
 			this.alto=7;
 		    this.ancho=10;
 		    Botones =new JButton [ancho][alto];
+		    Tablero t = new Tablero(ancho ,alto);
+		    t.generarCasillas(5);
 		    elArray = new String [ancho][alto];
+		   
+		    Casilla[][] lista = t.getCasilla();
+		    System.out.println(lista.length);
+		    for (int i=0;i<ancho;i++){
+			       for (int z=0;z<alto;z++){
+			    	   elArray[i][z] = lista[i][z].getInfoCasilla() ;
+			       }
+		    }
+		    elArray[2][2] = "s";
+		    
 		}else if(dificultad.equals("Media")){
 			this.alto=10;
 		    this.ancho=15;
@@ -94,7 +106,7 @@ public class InterfazTablero extends JFrame {
 	private JPanel getPanel_2() {
 		if (panel_2 == null) {
 			panel_2 = new JPanel();
-			panel_2.setLayout(new GridLayout(0, 10, 0, 0));
+			panel_2.setLayout(new GridLayout(ancho, alto, 0, 0));
 		}
 		System.out.println(ancho);
 		for(int x =0; x<ancho; x++){
@@ -119,16 +131,9 @@ public class InterfazTablero extends JFrame {
 	    Botones[i][z].setText(elArray[i][z]);
 	    Botones[i][z].setEnabled(false);
 	 
-	    if (elArray[i][z]==" "){
-	    Botones[i][z].setEnabled(false);
-	    }
-	    else {
-	     Botones[i][z].setEnabled(false);
-	    }
-	    if (Botones[i][z].getText()=="B"){
-	         
-	         }
+	    
 	 
 	 }
+	
 	
 }
