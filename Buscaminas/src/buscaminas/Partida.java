@@ -31,8 +31,14 @@ public class Partida extends Observable{
 		PantallaInicial pi = new PantallaInicial();
 	}
 	
-	private void terminar(){
-		
+	private void terminar(boolean pB){
+		PantallaFinal pant;
+		if (pB) {
+			pant=new PantallaFinal("Victoria",this.puntuacion);
+		}
+		else {
+			pant=new PantallaFinal("Derrota",this.puntuacion);
+		}
 		
 	}
 	
@@ -52,54 +58,57 @@ public class Partida extends Observable{
 					this.clicar(pX+1, pY, pClick);
 					this.clicar(pX, pY+1, pClick);
 				}
-				else if(pX==0 && pY==this.tablero.dimY()) {
+				else if(pX==0 && pY==this.tablero.dimY()-1) {
 					this.clicar(pX+1, pY, pClick);
 					this.clicar(pX, pY-1, pClick);
 				}
-				else if(pX==this.tablero.dimX() && pY==0) {
+				else if(pX==this.tablero.dimX()-1 && pY==0) {
 					this.clicar(pX-1, pY, pClick);
 					this.clicar(pX, pY+1, pClick);
 				}
-				else if(pX==this.tablero.dimX() && pY==this.tablero.dimY()) {
+				else if(pX==this.tablero.dimX()-1 && pY==this.tablero.dimY()-1) {
 					this.clicar(pX, pY-1, pClick);
 					this.clicar(pX-1, pY, pClick);
 				}
 				else if(pX==0) {
-					this.clicar(pX+1, pY-1, pClick);
+					//this.clicar(pX+1, pY-1, pClick);
 					this.clicar(pX+1, pY, pClick);
-					this.clicar(pX+1, pY+1, pClick);
+					//this.clicar(pX+1, pY+1, pClick);
 				}
-				else if(pX==this.tablero.dimX()) {
-					this.clicar(pX-1, pY-1, pClick);
+				else if(pX==this.tablero.dimX()-1) {
+					//this.clicar(pX-1, pY-1, pClick);
 					this.clicar(pX-1, pY, pClick);
-					this.clicar(pX-1, pY+1, pClick);
+					//this.clicar(pX-1, pY+1, pClick);
 				}
 				else if(pY==0) {
-					this.clicar(pX-1, pY+1, pClick);
+					//this.clicar(pX-1, pY+1, pClick);
 					this.clicar(pX, pY+1, pClick);
-					this.clicar(pX+1, pY+1, pClick);
+					//this.clicar(pX+1, pY+1, pClick);
 				}
-				else if(pY==this.tablero.dimY()) {
-					this.clicar(pX-1, pY-1, pClick);
+				else if(pY==this.tablero.dimY()-1) {
+					//this.clicar(pX-1, pY-1, pClick);
 					this.clicar(pX, pY-1, pClick);
-					this.clicar(pX+1, pY-1, pClick);
+					//this.clicar(pX+1, pY-1, pClick);
 				}
 				else {
-					this.clicar(pX-1, pY-1, pClick);
+					//this.clicar(pX-1, pY-1, pClick);
 					this.clicar(pX-1, pY, pClick);
-					this.clicar(pX-1, pY+1, pClick);
+					//this.clicar(pX-1, pY+1, pClick);
 					this.clicar(pX, pY-1, pClick);
 					this.clicar(pX, pY+1, pClick);
-					this.clicar(pX+1, pY-1, pClick);
+					//this.clicar(pX+1, pY-1, pClick);
 					this.clicar(pX+1, pY, pClick);
-					this.clicar(pX+1, pY+1, pClick);
+					//this.clicar(pX+1, pY+1, pClick);
+				
 				}
 			}
 			else if(res==-1) {
-				this.terminar();
+				this.terminar(false);
 			}
 			
 			this.notify(d);
+			if (this.tablero.ganado()) {
+				this.terminar(true);}
 		}
 		
 	}

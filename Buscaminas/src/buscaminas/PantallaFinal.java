@@ -1,3 +1,5 @@
+package Buscaminas;
+
 import java.awt.Dimension;
 
 import javax.swing.JFrame;

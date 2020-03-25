@@ -80,13 +80,27 @@ public class InterfazTablero extends JFrame implements Observer {
 		}else if(dificultad.equals("Media")){
 			this.alto=10;
 		    this.ancho=15;
-		    Botones =new JButton [ancho][alto];
+		    Partida.getMiPartida().setTablero(new Tablero(ancho,alto));
+		    Casilla[][] c = Partida.getMiPartida().getTablero().getTablero() ;
+		    Botones = new JButton[ancho][alto];
 		    elArray = new Integer [ancho][alto];
+		    for (int i=0;i<ancho;i++){
+			       for (int z=0;z<alto;z++){
+			    	   elArray[i][z] = c[i][z].getInfoCasilla();
+			       }
+		    }
 		}else{
 			this.alto=12;
 		    this.ancho=25;
-		    Botones =new JButton [ancho][alto];
+		    Partida.getMiPartida().setTablero(new Tablero(ancho,alto));
+		    Casilla[][] c = Partida.getMiPartida().getTablero().getTablero() ;
+		    Botones = new JButton[ancho][alto];
 		    elArray = new Integer [ancho][alto];
+		    for (int i=0;i<ancho;i++){
+			       for (int z=0;z<alto;z++){
+			    	   elArray[i][z] = c[i][z].getInfoCasilla();
+			       }
+		    }
 		}
 		System.out.println(ancho);
 	}
@@ -99,7 +113,7 @@ public class InterfazTablero extends JFrame implements Observer {
 	}
 	private JLabel getLblNewLabel() {
 		if (lblNewLabel == null) {
-			lblNewLabel = new JLabel("BUSCAMINAS V1");
+			lblNewLabel = new JLabel("BUSCAMINAS V1" );
 		}
 		return lblNewLabel;
 	}
@@ -146,25 +160,26 @@ public class InterfazTablero extends JFrame implements Observer {
 		System.out.println("holaaaaaaaaaaaaa");
 		Coordenadas coordenadas =  (Coordenadas) arg;
 		if (coordenadas.res==10) {
-			System.out.println(1);
+			
 			//Mostrar casilla vacia
 		}
 		else if (coordenadas.res==11) {
-			System.out.println(2);
+			
 			//Poner banderin en coordenadas especificadas
 		}
 		else if (coordenadas.res==-1) {
-			System.out.println(3);
+			
 			//Has perdido
 			
 		}
 		else if (coordenadas.res==0){
-			System.out.println(4);
+			
 			//Mostrar casilla vacia
 			Botones[coordenadas.x][coordenadas.y].setEnabled(false);
+			this.metodoStackOverFlow(coordenadas.x, coordenadas.y);
 		}
 		else {
-			System.out.println(5);
+			
 			elArray[coordenadas.x][coordenadas.y]=coordenadas.res;
 			Botones[coordenadas.x][coordenadas.y].setEnabled(false);
 		}
@@ -172,5 +187,70 @@ public class InterfazTablero extends JFrame implements Observer {
 	private void añadirmeObserver() {
 		Partida.getMiPartida().añadirObserver(this);
 	}
-	
+	private void metodoStackOverFlow(int i, int z) {
+		//i ancho columnas
+		//z alto filas
+		   if ( z!=0 && i!=0 && z!=alto-1 && i!=ancho-1){
+		    Botones[i-1][z].setEnabled(false);
+		   // Botones[i-1][z-1].setEnabled(false);
+		    //Botones[i-1][z+1].setEnabled(false);
+		    Botones[i][z-1].setEnabled(false);
+		    Botones[i][z+1].setEnabled(false);
+		    Botones[i+1][z].setEnabled(false);
+		    //Botones[i+1][z+1].setEnabled(false);
+		    //Botones[i+1][z-1].setEnabled(false);
+		    if(i==0 && z==0) {
+		    	Botones[i+1][z].setText(elArray[i+1][z].toString());
+				Botones[i][z+1].setText(elArray[i][z+1].toString());
+		    }
+				
+			else if(i==0 && z==alto-1) {
+				 Botones[i][z-1].setText(elArray[i][z-1].toString());
+				 Botones[i-1][z].setText(elArray[i-1][z].toString());
+				
+			}
+			else if(i==ancho-1 && z==0) {
+				Botones[i][z+1].setText(elArray[i][z+1].toString());
+				Botones[i-1][z].setText(elArray[i-1][z].toString());
+			}
+			else if(i==ancho-1 && z==alto-1) {
+				 Botones[i][z-1].setText(elArray[i][z-1].toString());
+				 Botones[i-1][z-1].setText(elArray[i-1][z-1].toString());
+			}
+			else if(i==0) {
+				Botones[i+1][z].setText(elArray[i+1][z].toString());
+				Botones[i][z+1].setText(elArray[i][z+1].toString());
+				Botones[i][z-1].setText(elArray[i][z-1].toString());
+				
+			}
+			else if(i==ancho-1) {
+				Botones[i-1][z].setText(elArray[i-1][z].toString());
+				Botones[i][z+1].setText(elArray[i][z+1].toString());
+				Botones[i][z-1].setText(elArray[i][z-1].toString());
+			}
+			else if(z==0) {
+				 Botones[i][z+1].setText(elArray[i][z+1].toString());
+				 Botones[i+1][z].setText(elArray[i+1][z].toString());
+				 Botones[i-1][z].setText(elArray[i-1][z].toString());
+			}
+			else if(z==alto-1) {
+				 Botones[i][z-1].setText(elArray[i][z-1].toString());
+				 Botones[i+1][z].setText(elArray[i+1][z].toString());
+				 Botones[i-1][z].setText(elArray[i-1][z].toString());
+				
+			}
+			else {
+				Botones[i-1][z].setText(elArray[i-1][z].toString());
+				//Botones[i-1][z-1].setText(elArray[i-1][z-1].toString());
+				//Botones[i-1][z+1].setText(elArray[i-1][z+1].toString());
+				Botones[i][z-1].setText(elArray[i][z-1].toString());
+				Botones[i][z+1].setText(elArray[i][z+1].toString());
+				Botones[i+1][z].setText(elArray[i+1][z].toString());
+				//Botones[i+1][z+1].setText(elArray[i+1][z+1].toString());
+				//Botones[i+1][z-1].setText(elArray[i+1][z-1].toString());
+			}
+		    
+		}
+		   
+	}
 }

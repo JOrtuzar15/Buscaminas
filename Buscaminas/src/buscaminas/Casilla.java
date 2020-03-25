@@ -21,4 +21,8 @@ public class Casilla {
 		return this.infoCasilla;
 	}
 	public void incrementar(){ this.infoCasilla++;}
+	
+	public boolean clear() {
+		return (this.estado instanceof Destapado);
+	}
 }

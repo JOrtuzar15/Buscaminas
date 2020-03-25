@@ -12,7 +12,7 @@ public class Tablero {
 			 this.ancho= pAncho;
 			 this.alto = pAlto;
 			 this.matriz = new Casilla [pAncho][pAlto];
-			 this.generarCasillas(5);
+			 this.generarCasillas(1);
 			
 		 }
 		 
@@ -83,9 +83,7 @@ public class Tablero {
 			                 if ((i-1 >=0) && matriz[i-1][z].getInfoCasilla() != -1){
 			                	 matriz[i-1][z].incrementar();
 			                 }
-			                
-			                
-			  			    	   
+			             
 			  			    	   
 			  			       }
 			  		    }
@@ -127,6 +125,14 @@ public class Tablero {
 			return this.alto;
 		}
 		
+		public boolean ganado() {
+			boolean ganar=true;
+			for (int i= 0;i<this.matriz.length;i++) {
+				for (int j =0;j<this.matriz[0].length;j++) {
+					ganar=(ganar&&(this.matriz[i][j].getInfoCasilla()!=-1)) || (ganar && this.matriz[i][j].clear()) ;
+				}
+			}
+			return ganar;
+		}
 		
-
 }
