@@ -119,6 +119,14 @@ public class Tablero {
 			// PENDIENTE
 		}
 		
+		public int dimX() {
+			return this.ancho;
+		}
+		
+		public int dimY() {
+			return this.alto;
+		}
+		
 		
 
 }

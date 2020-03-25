@@ -47,17 +47,55 @@ public class Partida extends Observable{
 		if((res != 9)) {
 			Coordenadas d = new Coordenadas(res , pX ,pY);
 			
-			/*if (res==0) {
-				this.clicar(pX-1, pY-1, pClick);
-				this.clicar(pX-1, pY, pClick);
-				this.clicar(pX-1, pY+1, pClick);
-				this.clicar(pX, pY-1, pClick);
-				this.clicar(pX, pY+1, pClick);
-				this.clicar(pX+1, pY-1, pClick);
-				this.clicar(pX+1, pY, pClick);
-				this.clicar(pX+1, pY+1, pClick);
+			if (res==0) {
+				if(pX==0 && pY==0) {
+					this.clicar(pX+1, pY, pClick);
+					this.clicar(pX, pY+1, pClick);
+				}
+				else if(pX==0 && pY==this.tablero.dimY()) {
+					this.clicar(pX+1, pY, pClick);
+					this.clicar(pX, pY-1, pClick);
+				}
+				else if(pX==this.tablero.dimX() && pY==0) {
+					this.clicar(pX-1, pY, pClick);
+					this.clicar(pX, pY+1, pClick);
+				}
+				else if(pX==this.tablero.dimX() && pY==this.tablero.dimY()) {
+					this.clicar(pX, pY-1, pClick);
+					this.clicar(pX-1, pY, pClick);
+				}
+				else if(pX==0) {
+					this.clicar(pX+1, pY-1, pClick);
+					this.clicar(pX+1, pY, pClick);
+					this.clicar(pX+1, pY+1, pClick);
+				}
+				else if(pX==this.tablero.dimX()) {
+					this.clicar(pX-1, pY-1, pClick);
+					this.clicar(pX-1, pY, pClick);
+					this.clicar(pX-1, pY+1, pClick);
+				}
+				else if(pY==0) {
+					this.clicar(pX-1, pY+1, pClick);
+					this.clicar(pX, pY+1, pClick);
+					this.clicar(pX+1, pY+1, pClick);
+				}
+				else if(pY==this.tablero.dimY()) {
+					this.clicar(pX-1, pY-1, pClick);
+					this.clicar(pX, pY-1, pClick);
+					this.clicar(pX+1, pY-1, pClick);
+				}
+				else {
+					this.clicar(pX-1, pY-1, pClick);
+					this.clicar(pX-1, pY, pClick);
+					this.clicar(pX-1, pY+1, pClick);
+					this.clicar(pX, pY-1, pClick);
+					this.clicar(pX, pY+1, pClick);
+					this.clicar(pX+1, pY-1, pClick);
+					this.clicar(pX+1, pY, pClick);
+					this.clicar(pX+1, pY+1, pClick);
+				}
 			}
-			else */if(res==-1) {
+			else if(res==-1) {
 				this.terminar();
 			}
 			
