@@ -12,6 +12,7 @@ public class Tablero {
 			 this.ancho= pAncho;
 			 this.alto = pAlto;
 			 this.matriz = new Casilla [pAncho][pAlto];
+			 this.generarCasillas(5);
 			
 		 }
 		 
@@ -31,7 +32,10 @@ public class Tablero {
 			 
 			 if(z>=0 && i>=0 && z<alto && i<ancho) {
 				 if(matriz[i][z]==null) {
-					 matriz[i][z] = new Casilla("-1");}
+					 matriz[i][z] = new Casilla(-1);}
+				 else {
+					 this.generarBomba();
+				 }
 			 } 
 				 
 		 }
@@ -40,51 +44,57 @@ public class Tablero {
 			 for (int i=0;i<ancho;i++){
 			       for (int z=0;z<alto;z++){
 			    	 if(matriz[i][z]==null) {
-			    	   matriz[i][z] = new Casilla(" "); 
+			    	   matriz[i][z] = new Casilla(0); 
 			    			   }
 			       	}
 			       }
 		}
 		 private void comprobar() {
-			
+			 
 			 for (int i=0;i<ancho;i++){
 			       for (int z=0;z<alto;z++){
-			       int numeroComprueba=0;  
-			       if (matriz[i][z].getInfoCasilla().equals("-1") == false){
+			        
+			       if (matriz[i][z].getInfoCasilla() == -1){
 			        if  (z>=0 && i>=0 && z<alto && i<ancho){
+			        	System.out.println("BOMBITAAAAAAAAAAAA");
 			           System.out.println(i+ " "+ z +" "+ ancho +" " +alto);
 			           
-			           if ((z-1>=0) &&  matriz[i][z-1].getInfoCasilla().equals("-1")){
-			                  numeroComprueba++;
+			           		if ((z-1>=0) &&  matriz[i][z-1].getInfoCasilla() != -1){
+			                  matriz[i][z-1].incrementar();
 			                 }
-			                 if ((z-1>=0) && (i-1>=0) && matriz[i-1][z-1].getInfoCasilla().equals("-1")){
-			                  numeroComprueba++;
+			                 if ((z-1>=0) && (i-1>=0) && matriz[i-1][z-1].getInfoCasilla() != -1 ){
+			                	 matriz[i-1][z-1].incrementar();
 			                 }
-			                 if ((z-1>=0) && (i+1 < ancho) && matriz[i+1][z-1].getInfoCasilla().equals("-1")){
-			                  numeroComprueba++;
+			                 if ((z-1>=0) && (i+1 < ancho) && matriz[i+1][z-1].getInfoCasilla() != -1){
+			                	 matriz[i+1][z-1].incrementar();
 			                 }
-			                 if ((z+1 < alto) && matriz[i][z+1].getInfoCasilla().equals("-1")){
-			                  numeroComprueba++;
+			                 if ((z+1 < alto) && matriz[i][z+1].getInfoCasilla() != -1){
+			                	 matriz[i][z+1].incrementar();
 			                 }
-			                 if ((z+1 < alto) && (i+1 < ancho) && matriz[i+1][z+1].getInfoCasilla().equals("-1")){
-			                  numeroComprueba++;
+			                 if ((z+1 < alto) && (i+1 < ancho) && matriz[i+1][z+1].getInfoCasilla() != -1){
+			                	 matriz[i+1][z+1].incrementar();
 			                 }
-			                 if ((z+1 < alto) && (i-1 >=0) && matriz[i-1][z+1].getInfoCasilla().equals("-1")){
-			                  numeroComprueba++;
+			                 if ((z+1 < alto) && (i-1 >=0) && matriz[i-1][z+1].getInfoCasilla() != -1){
+			                	 matriz[i-1][z+1].incrementar();
 			                 }
-			                 if ((i+1 < ancho) && matriz[i+1][z].getInfoCasilla().equals("-1")){
-			                  numeroComprueba++;
+			                 if ((i+1 < ancho) && matriz[i+1][z].getInfoCasilla() != -1){
+			                	 matriz[i+1][z].incrementar();
 			                 }
-			                 if ((i-1 >=0) && matriz[i-1][z].getInfoCasilla().equals("-1")){
-			                  numeroComprueba++;
+			                 if ((i-1 >=0) && matriz[i-1][z].getInfoCasilla() != -1){
+			                	 matriz[i-1][z].incrementar();
 			                 }
-			                 if (numeroComprueba != 0) {
-								 matriz[i][z] = new Casilla(Integer.toString(numeroComprueba)) ;
-								 }
-								
-			                      
-			        }         
-			        }               
+			                
+			                
+			  			    	   
+			  			    	   
+			  			       }
+			  		    }
+								          
+			        	}         
+			        }  
+			 for (int d=0;d<ancho;d++){
+			       for (int e=0;e<alto;e++){
+			    	  System.out.println("casilla" + matriz[d][e].getInfoCasilla());
 			       }     
 			   } 
 		 }
@@ -93,15 +103,22 @@ public class Tablero {
 		 }
 		 
 		 public int clicar(int x, int y , int click) {
+			System.out.println(x);
+			System.out.println(y);
 			Casilla c = this.matriz[x][y];
 			if(click == 1) {
 				return c.clickIzq();
 			}else {
 				return c.clickDer();
 			}
-			 
-			 
-						 
+			 				 
 		 }
+
+
+		public void reset() {
+			// PENDIENTE
+		}
+		
+		
 
 }

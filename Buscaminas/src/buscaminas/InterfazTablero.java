@@ -1,4 +1,4 @@
-package buscaminas;
+package Buscaminas;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -25,11 +25,12 @@ public class InterfazTablero extends JFrame implements Observer {
 	private int ancho;
 	private int alto;
 	public  JButton [][] Botones; //Matriz de botones
-	public  String [][] elArray; //Matriz de String subyacente a la matriz de botones
+	public  Integer [][] elArray; //Matriz de String subyacente a la matriz de botones
 	private String dificultad;
 	
 
 	public InterfazTablero(String pdificultad) {
+		this.añadirmeObserver();
 		this.dificultad = pdificultad;
 		this.setDimensiones();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -56,29 +57,36 @@ public class InterfazTablero extends JFrame implements Observer {
 		gbc_panel_2.gridx = 0;
 		gbc_panel_2.gridy = 1;
 		contentPane.add(getPanel_2(), gbc_panel_2);
+		
 		this.setVisible(true);
 		
 	}
 	
 	public void setDimensiones (){
-	
+		
 		if (dificultad.equals("Facil")){
 			this.alto=7;
 		    this.ancho=10;
+		    Partida.getMiPartida().setTablero(new Tablero(ancho,alto));
+		    Casilla[][] c = Partida.getMiPartida().getTablero().getTablero() ;
 		    Botones = new JButton[ancho][alto];
-		    
-		    
-		    
+		    elArray = new Integer [ancho][alto];
+		    for (int i=0;i<ancho;i++){
+			       for (int z=0;z<alto;z++){
+			    	   elArray[i][z] = c[i][z].getInfoCasilla();
+			       }
+		    }
+
 		}else if(dificultad.equals("Media")){
 			this.alto=10;
 		    this.ancho=15;
 		    Botones =new JButton [ancho][alto];
-		    elArray = new String [ancho][alto];
+		    elArray = new Integer [ancho][alto];
 		}else{
 			this.alto=12;
 		    this.ancho=25;
 		    Botones =new JButton [ancho][alto];
-		    elArray = new String [ancho][alto];
+		    elArray = new Integer [ancho][alto];
 		}
 		System.out.println(ancho);
 	}
@@ -112,45 +120,57 @@ public class InterfazTablero extends JFrame implements Observer {
 		       for (int i=0;i<ancho;i++){
 		             for (int z=0;z<alto;z++){
 		             if (ar.getSource()==Botones[i][z]){
-		                 Partida.getMiPartida().clicar(i,z,1);
+		                 if ((ar.getModifiers() & 16)!=0) {
+		            	 Partida.getMiPartida().clicar(i,z,1);}
+		                 else if ((ar.getModifiers() & 4)!=0) {
+			            	 Partida.getMiPartida().clicar(i,z,3);}
 		  
-		             }                }        }            }               }             );  
+		             }        	             if (ar.getSource()==Botones[i][z]){
+		                  mostrarCasilla(i,z);
+		        		  
+		             }                        }        }            }               }             );  
 		}
 	}
 	return panel_2;
 }
 	public void mostrarCasilla(int i,int z){
-	    Botones[i][z].setText(elArray[i][z]);
-	    Botones[i][z].setEnabled(false);
+	    Botones[i][z].setText(elArray[i][z].toString());
+	   Botones[i][z].setEnabled(false);
 	 
 	    
 	 
 	 }
-	
 
 	@Override
 	public void update(Observable o, Object arg) {
-		
-		Integer[] coordenadas = (Integer []) arg;
-		if (coordenadas[2]==10) {
+		System.out.println("holaaaaaaaaaaaaa");
+		Coordenadas coordenadas =  (Coordenadas) arg;
+		if (coordenadas.res==10) {
+			System.out.println(1);
 			//Mostrar casilla vacia
 		}
-		else if (coordenadas[2]==11) {
+		else if (coordenadas.res==11) {
+			System.out.println(2);
 			//Poner banderin en coordenadas especificadas
 		}
-		else if (coordenadas[2]==-1) {
+		else if (coordenadas.res==-1) {
+			System.out.println(3);
 			//Has perdido
 			
 		}
-		else if (coordenadas[2]==0){
+		else if (coordenadas.res==0){
+			System.out.println(4);
 			//Mostrar casilla vacia
-			Botones[coordenadas[0]][coordenadas[1]].setEnabled(false);
+			Botones[coordenadas.x][coordenadas.y].setEnabled(false);
 		}
 		else {
-			elArray[coordenadas[0]][coordenadas[1]]=coordenadas[2].toString();
-			Botones[coordenadas[0]][coordenadas[1]].setEnabled(false);
+			System.out.println(5);
+			elArray[coordenadas.x][coordenadas.y]=coordenadas.res;
+			Botones[coordenadas.x][coordenadas.y].setEnabled(false);
 		}
 	}
-	
+	private void añadirmeObserver() {
+		Partida.getMiPartida().añadirObserver(this);
+	}
 	
 }
