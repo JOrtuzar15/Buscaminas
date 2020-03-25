@@ -192,62 +192,72 @@ public class InterfazTablero extends JFrame implements Observer {
 		//z alto filas
 		   if ( z!=0 && i!=0 && z!=alto-1 && i!=ancho-1){
 		    Botones[i-1][z].setEnabled(false);
-		   // Botones[i-1][z-1].setEnabled(false);
-		    //Botones[i-1][z+1].setEnabled(false);
+		    Botones[i-1][z-1].setEnabled(false);
+		    Botones[i-1][z+1].setEnabled(false);
 		    Botones[i][z-1].setEnabled(false);
 		    Botones[i][z+1].setEnabled(false);
 		    Botones[i+1][z].setEnabled(false);
-		    //Botones[i+1][z+1].setEnabled(false);
-		    //Botones[i+1][z-1].setEnabled(false);
+		    Botones[i+1][z+1].setEnabled(false);
+		    Botones[i+1][z-1].setEnabled(false);
+		   //Botones[i][z].setEnabled(false);
 		    if(i==0 && z==0) {
 		    	Botones[i+1][z].setText(elArray[i+1][z].toString());
 				Botones[i][z+1].setText(elArray[i][z+1].toString());
+				Botones[i][z].setText(elArray[i][z].toString());
 		    }
 				
 			else if(i==0 && z==alto-1) {
 				 Botones[i][z-1].setText(elArray[i][z-1].toString());
 				 Botones[i-1][z].setText(elArray[i-1][z].toString());
+				 Botones[i][z].setText(elArray[i][z].toString());
 				
 			}
 			else if(i==ancho-1 && z==0) {
 				Botones[i][z+1].setText(elArray[i][z+1].toString());
 				Botones[i-1][z].setText(elArray[i-1][z].toString());
+				Botones[i][z].setText(elArray[i][z].toString());
 			}
 			else if(i==ancho-1 && z==alto-1) {
 				 Botones[i][z-1].setText(elArray[i][z-1].toString());
 				 Botones[i-1][z-1].setText(elArray[i-1][z-1].toString());
+				 Botones[i][z].setText(elArray[i][z].toString());
 			}
 			else if(i==0) {
 				Botones[i+1][z].setText(elArray[i+1][z].toString());
 				Botones[i][z+1].setText(elArray[i][z+1].toString());
 				Botones[i][z-1].setText(elArray[i][z-1].toString());
+				Botones[i][z].setText(elArray[i][z].toString());
 				
 			}
 			else if(i==ancho-1) {
 				Botones[i-1][z].setText(elArray[i-1][z].toString());
 				Botones[i][z+1].setText(elArray[i][z+1].toString());
 				Botones[i][z-1].setText(elArray[i][z-1].toString());
+				Botones[i][z].setText(elArray[i][z].toString());
 			}
 			else if(z==0) {
 				 Botones[i][z+1].setText(elArray[i][z+1].toString());
 				 Botones[i+1][z].setText(elArray[i+1][z].toString());
 				 Botones[i-1][z].setText(elArray[i-1][z].toString());
+				 Botones[i][z].setText(elArray[i][z].toString());
 			}
 			else if(z==alto-1) {
 				 Botones[i][z-1].setText(elArray[i][z-1].toString());
 				 Botones[i+1][z].setText(elArray[i+1][z].toString());
 				 Botones[i-1][z].setText(elArray[i-1][z].toString());
+				 Botones[i][z].setText(elArray[i][z].toString());
 				
 			}
 			else {
 				Botones[i-1][z].setText(elArray[i-1][z].toString());
-				//Botones[i-1][z-1].setText(elArray[i-1][z-1].toString());
-				//Botones[i-1][z+1].setText(elArray[i-1][z+1].toString());
+				Botones[i-1][z-1].setText(elArray[i-1][z-1].toString());
+				Botones[i-1][z+1].setText(elArray[i-1][z+1].toString());
 				Botones[i][z-1].setText(elArray[i][z-1].toString());
 				Botones[i][z+1].setText(elArray[i][z+1].toString());
 				Botones[i+1][z].setText(elArray[i+1][z].toString());
-				//Botones[i+1][z+1].setText(elArray[i+1][z+1].toString());
-				//Botones[i+1][z-1].setText(elArray[i+1][z-1].toString());
+				Botones[i+1][z+1].setText(elArray[i+1][z+1].toString());
+				Botones[i+1][z-1].setText(elArray[i+1][z-1].toString());
+				//Botones[i][z].setText(elArray[i][z].toString());
 			}
 		    
 		}
