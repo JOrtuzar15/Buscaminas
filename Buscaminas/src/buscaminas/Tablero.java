@@ -56,7 +56,7 @@ public class Tablero {
 			        
 			       if (matriz[i][z].getInfoCasilla() == -1){
 			        if  (z>=0 && i>=0 && z<alto && i<ancho){
-			        	System.out.println("BOMBITAAAAAAAAAAAA");
+			        	
 			           System.out.println(i+ " "+ z +" "+ ancho +" " +alto);
 			           
 			           		if ((z-1>=0) &&  matriz[i][z-1].getInfoCasilla() != -1){
@@ -90,11 +90,7 @@ public class Tablero {
 								          
 			        	}         
 			        }  
-			 for (int d=0;d<ancho;d++){
-			       for (int e=0;e<alto;e++){
-			    	  System.out.println("casilla" + matriz[d][e].getInfoCasilla());
-			       }     
-			   } 
+			
 		 }
 		 public Casilla[][] getTablero(){
 			 return this.matriz;
@@ -114,7 +110,8 @@ public class Tablero {
 
 
 		public void reset() {
-			// PENDIENTE
+			
+			
 		}
 		
 		public int dimX() {

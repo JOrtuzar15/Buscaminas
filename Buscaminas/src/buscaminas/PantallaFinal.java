@@ -180,8 +180,11 @@ public class PantallaFinal extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		System.out.println(puntos);
 		if (e.getSource().equals(btnReset)){
-			PantallaInicial pi = new PantallaInicial();
+			Partida.getMiPartida().reset();
 			this.setVisible(false);
+			
+			
+			
 		}
 		if (e.getSource().equals(btnSalir)){
 			if (JOptionPane.showConfirmDialog(rootPane, "¿Estas seguro de que quieres salir?") == 0){

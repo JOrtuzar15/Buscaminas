@@ -69,39 +69,26 @@ public class InterfazTablero extends JFrame implements Observer {
 			this.ancho=7;
 		    this.alto=10;
 		    Partida.getMiPartida().setTablero(new Tablero(alto,ancho));
-		    Casilla[][] c = Partida.getMiPartida().getTablero().getTablero() ;
+		  //  Casilla[][] c = Partida.getMiPartida().getTablero().getTablero() ;
 		    Botones = new JButton[alto][ancho];
 		    elArray = new Integer [alto][ancho];
-		    /*for (int x=0;x<alto;x++){
-			       for (int z=0;z<ancho;z++){
-			    	   elArray[x][z] = c[x][z].getInfoCasilla();
-			       }
-		    }*/
-
+		  
 		}else if(dificultad.equals("Media")){
 			this.ancho=10;
 		    this.alto=15;
 		    Partida.getMiPartida().setTablero(new Tablero(alto,ancho));
-		    Casilla[][] c = Partida.getMiPartida().getTablero().getTablero() ;
+		  //  Casilla[][] c = Partida.getMiPartida().getTablero().getTablero() ;
 		    Botones = new JButton[alto][ancho];
 		    elArray = new Integer [alto][ancho];
-		    /*for (int x=0;x<alto;x++){
-			       for (int y=0;y<ancho;y++){
-			    	   elArray[x][y] = c[x][y].getInfoCasilla();
-			       }
-		    }*/
+		  
 		}else{
 			this.ancho=12;
 		    this.alto=25;
 		    Partida.getMiPartida().setTablero(new Tablero(alto,ancho));
-		    Casilla[][] c = Partida.getMiPartida().getTablero().getTablero() ;
+		 //   Casilla[][] c = Partida.getMiPartida().getTablero().getTablero() ;
 		    Botones = new JButton[alto][ancho];
 		    elArray = new Integer [alto][ancho];
-		    /*for (int x=0;x<alto;x++){
-			       for (int y=0;y<ancho;y++){
-			    	   elArray[x][y] = c[x][y].getInfoCasilla();
-			       }
-		    }*/
+		   
 		}
 		System.out.println(alto);
 	}
@@ -143,10 +130,7 @@ public class InterfazTablero extends JFrame implements Observer {
 		    				  }
 		  
 		    			  }        	             
-		    			  /*if (ar.getSource()==Botones[x][y]){
-		    				  mostrarCasilla(x,y);
-		        		  
-		    			  }*/                        
+		    			                        
 		    		  }        
 		    	  }
 		      }               
@@ -175,13 +159,15 @@ public class InterfazTablero extends JFrame implements Observer {
 			//Poner banderin en coordenadas especificadas
 		}
 		else if (coordenadas.res==-1) {
-			
+			elArray[coordenadas.x][coordenadas.y]=coordenadas.res;
+			this.mostrarCasilla(coordenadas.x , coordenadas.y);
 			//Has perdido
 			
 		}
 		else if (coordenadas.res==0){
 			
 			//Mostrar casilla vacia
+			
 			Botones[coordenadas.x][coordenadas.y].setEnabled(false);
 			
 		}
@@ -194,80 +180,5 @@ public class InterfazTablero extends JFrame implements Observer {
 	private void añadirmeObserver() {
 		Partida.getMiPartida().añadirObserver(this);
 	}
-	/*private void metodoStackOverFlow(int x, int y) {
-		//i alto columnas
-		//z ancho filas
-		   if ( y!=0 && x!=0 && y!=ancho-1 && x!=alto-1){
-		    Botones[x-1][y].setEnabled(false);
-		    //Botones[x-1][y-1].setEnabled(false);
-		    //Botones[x-1][y+1].setEnabled(false);
-		    Botones[x][y-1].setEnabled(false);
-		    Botones[x][y+1].setEnabled(false);
-		    Botones[x+1][y].setEnabled(false);
-		    //Botones[x+1][y+1].setEnabled(false);
-		    //Botones[x+1][y-1].setEnabled(false);
-		    Botones[x][y].setEnabled(false);
-		    if(x==0 && y==0) {
-		    	Botones[x+1][y].setText(elArray[x+1][y].toString());
-				Botones[x][y+1].setText(elArray[x][y+1].toString());
-				Botones[x][y].setText(elArray[x][y].toString());
-		    }
-				
-			else if(x==0 && y==ancho-1) {
-				 Botones[x][y-1].setText(elArray[x][y-1].toString());
-				 Botones[x-1][y].setText(elArray[x-1][y].toString());
-				 Botones[x][y].setText(elArray[x][y].toString());
-				
-			}
-			else if(x==alto-1 && y==0) {
-				Botones[x][y+1].setText(elArray[x][y+1].toString());
-				Botones[x-1][y].setText(elArray[x-1][y].toString());
-				Botones[x][y].setText(elArray[x][y].toString());
-			}
-			else if(x==alto-1 && y==ancho-1) {
-				 Botones[x][y-1].setText(elArray[x][y-1].toString());
-				 Botones[x-1][x-1].setText(elArray[x-1][y-1].toString());
-				 Botones[x][y].setText(elArray[x][y].toString());
-			}
-			else if(x==0) {
-				Botones[x+1][y].setText(elArray[x+1][y].toString());
-				Botones[x][y+1].setText(elArray[x][y+1].toString());
-				Botones[x][y-1].setText(elArray[x][y-1].toString());
-				Botones[x][y].setText(elArray[x][y].toString());
-				
-			}
-			else if(x==alto-1) {
-				Botones[x-1][y].setText(elArray[x-1][y].toString());
-				Botones[x][y+1].setText(elArray[x][y+1].toString());
-				Botones[x][y-1].setText(elArray[x][y-1].toString());
-				Botones[x][y].setText(elArray[x][y].toString());
-			}
-			else if(y==0) {
-				 Botones[x][y+1].setText(elArray[x][y+1].toString());
-				 Botones[x+1][y].setText(elArray[x+1][y].toString());
-				 Botones[x-1][y].setText(elArray[x-1][y].toString());
-				 Botones[x][y].setText(elArray[x][y].toString());
-			}
-			else if(y==ancho-1) {
-				 Botones[x][y-1].setText(elArray[x][y-1].toString());
-				 Botones[x+1][y].setText(elArray[x+1][y].toString());
-				 Botones[x-1][y].setText(elArray[x-1][y].toString());
-				 Botones[x][y].setText(elArray[x][y].toString());
-				
-			}
-			else {
-				Botones[x-1][y].setText(elArray[x-1][y].toString());
-				//Botones[x-1][y-1].setText(elArray[x-1][y-1].toString());
-				//Botones[x-1][y+1].setText(elArray[x-1][y+1].toString());
-				Botones[x][y-1].setText(elArray[x][y-1].toString());
-				Botones[x][y+1].setText(elArray[x][y+1].toString());
-				Botones[x+1][y].setText(elArray[x+1][y].toString());
-				//Botones[x+1][y+1].setText(elArray[x+1][y+1].toString());
-				//Botones[x+1][y-1].setText(elArray[x+1][y-1].toString());
-				Botones[x][y].setText(elArray[x][y].toString());
-			}
-		    
-		}
-		   
-	}*/
+	
 }
