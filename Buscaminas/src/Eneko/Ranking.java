@@ -13,15 +13,21 @@ public class Ranking {
 	
 	//atributos
 	private ArrayList<Usuario> lista;
+	private static Ranking miRanking;
 	
 	//constructora
 	
-	public Ranking() {
+	private Ranking() {
 		this.lista=new ArrayList<Usuario>();
 		this.cargarDatos();
 	}
 	
-	
+	public static Ranking getMiRanking() {
+		if (miRanking == null) {
+			miRanking = new Ranking();
+		}
+		return miRanking;
+	}
 	
 	//otros metodos
 	public void annadirUsuario (Usuario pUsuario){
@@ -50,12 +56,14 @@ public class Ranking {
 		//Metodo anadido para visualizar los datos en ranking
 		//Va enlazando todos los datos de uno en uno y los devuelve para mostrar en RankingPantalla
 	public String jugadorYPuntuacion(){
-		String ranking=null; 
+		String ranking=""; 
+		int i = 0;
 		Usuario u=null;
 		Iterator<Usuario> itr=this.getIterador();
 		while (itr.hasNext()){
 			u=itr.next();
-			ranking=ranking+(u.getNombre()+" "+u.getPuntuacion()+"\n");
+			i++;
+			ranking=ranking+(i+ ". " + u.getNombre()+" "+u.getPuntuacion()+"\n");
 				
 		}
 		return ranking;
@@ -69,25 +77,26 @@ public class Ranking {
 			Usuario u=null;
 			Iterator<Usuario> itr=this.getIterador();
 			while (itr.hasNext()) {
-				u=itr.next();
-				fileWriter.write(u.getNombre()+" "+u.getPuntuacion()+"\n");
-			}
+					u=itr.next();
+					fileWriter.write(u.getNombre()+" "+u.getPuntuacion()+"\n");
+				}
 		}catch (IOException e) {
 			System.out.println("Error " + e);
 		}
 	}
 	
-	private void cargarDatos() {
+	public void cargarDatos() {
         try (FileReader fileReader = new FileReader("C:\\TEMP\\Ranking.txt")) {
             Scanner scanner = new Scanner(fileReader);
             while (scanner.hasNextLine()) {
-            String linea = scanner.nextLine();
-            String[] lineaSeparada = linea.split(" ");
-            String usuario = lineaSeparada[0];
-            int puntuacion = Integer.parseInt(lineaSeparada[1]);
-            Usuario a = new Usuario(usuario , puntuacion);
-			this.lista.add(a);
-				}
+            	String linea = scanner.nextLine();
+            	String[] lineaSeparada = linea.split(" ");
+            	String usuario = lineaSeparada[0];
+            	int puntuacion = Integer.parseInt(lineaSeparada[1]);
+            	Usuario u = new Usuario(usuario , puntuacion);
+            	this.lista.add(u);
+            	System.out.println("Leyendo...");
+			}
             scanner.close();
             }
         catch (IOException e) {
@@ -101,16 +110,24 @@ public class Ranking {
 	//y añadir ordenado
 	public void annadirOrdenado(Usuario pUsuario){
 		Usuario aux=null;
+		boolean salir=false;
 		int cont=0;
 		Iterator<Usuario> itr=this.getIterador();
-		while (itr.hasNext() && pUsuario.getPuntuacion()<aux.getPuntuacion() ){
+		if (this.lista.size()==0){
+			this.annadirUsuario(pUsuario);
+			}
+		else
+		
+		while (itr.hasNext() && !salir){
 			aux=itr.next();
-			cont=cont+1;
 			if (pUsuario.getPuntuacion()>aux.getPuntuacion()){
-				this.lista.add(cont, pUsuario);
+				salir=true;
+			}else {
+				cont=cont+1;
 			}
-				
-			}
+			
+		}
+		this.lista.add(cont, pUsuario);
 		escribirDatos();
 		}
 	}

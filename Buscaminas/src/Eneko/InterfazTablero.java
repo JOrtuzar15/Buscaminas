@@ -71,18 +71,25 @@ public class InterfazTablero extends JFrame implements Observer {
 		if (dificultad.equals("Facil")){
 			this.ancho=7;
 		    this.alto=10;
-		    
+		    Partida.getMiPartida().setTablero(new Tablero(alto,ancho));
+		    Botones = new JButton[alto][ancho];
+		    elArray = new Integer [alto][ancho];
+		  
 		}else if(dificultad.equals("Media")){
 			this.ancho=10;
 		    this.alto=15;
-		    
+		    Partida.getMiPartida().setTablero(new Tablero(alto,ancho));
+		    Botones = new JButton[alto][ancho];
+		    elArray = new Integer [alto][ancho];
+		  
 		}else{
 			this.ancho=12;
 		    this.alto=25;
+		    Partida.getMiPartida().setTablero(new Tablero(alto,ancho));
+		    Botones = new JButton[alto][ancho];
+		    elArray = new Integer [alto][ancho];
+		   
 		}
-		Partida.getMiPartida().setTablero(alto,ancho);
-	    Botones = new JButton[alto][ancho];
-	    elArray = new Integer [alto][ancho];
 		System.out.println(alto);
 	}
 	private JPanel getPanel() {
@@ -157,15 +164,15 @@ public class InterfazTablero extends JFrame implements Observer {
 	public void mostrarCasilla(int x,int y){
 	    Botones[x][y].setText(elArray[x][y].toString());
 	   Botones[x][y].setEnabled(false);
+	 
+	    
+	 
 	 }
 
 	@Override
 	public void update(Observable o, Object arg) {
 		Coordenadas coordenadas =  (Coordenadas) arg;
-		if(arg==null) {
-			reset();
-		}
-		else if (coordenadas.res==10) {
+		if (coordenadas.res==10) {
 			System.out.println("10 entra");
 			 Botones[coordenadas.x][coordenadas.y].setIcon(null);
 			  //Mostrar casilla vacia
@@ -199,12 +206,7 @@ public class InterfazTablero extends JFrame implements Observer {
 	private void añadirmeObserver() {
 		Partida.getMiPartida().añadirObserver(this);
 	}
-	
-	private void reset() {
-		setDimensiones();
-		this.panel_2=null;
-		this.panel_2=getPanel_2();
-	}
+
 	public String getDificultad() {
 		return this.dificultad;
 	}

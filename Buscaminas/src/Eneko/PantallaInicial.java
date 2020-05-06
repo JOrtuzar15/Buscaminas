@@ -52,7 +52,7 @@ public class PantallaInicial extends JFrame implements ActionListener {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					PantallaInicial frame = new PantallaInicial();
+					PantallaInicial frame = Partida.getMiPartida().empezar();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -213,9 +213,10 @@ public class PantallaInicial extends JFrame implements ActionListener {
 					System.out.println("Dificultad elegida AVANZADA");
 					InterfazTablero t = new InterfazTablero(dificultad);
 					}
-				this.getNombreJugador();
-				//Eliminar esta linea es para comprobar que pilla el nombre
+				
+				this.getNomJugador();
 			}
+			
 		}
 	
 	private JButton getBtnJugar() {
@@ -234,10 +235,13 @@ public class PantallaInicial extends JFrame implements ActionListener {
 		return panel_5;
 	}
 	
-
 	public String getNombreJugador(){
 		System.out.println(getTextField().getText());
 		return getTextField().getText();
+	}
+	
+	public void getNomJugador(){
+		Partida.getMiPartida().setNombre(getTextField().getText());
 	}
 	
 	private JPanel getPanel_6() {

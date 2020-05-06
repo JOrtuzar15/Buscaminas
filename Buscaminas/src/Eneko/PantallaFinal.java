@@ -26,6 +26,7 @@ public class PantallaFinal extends JFrame implements ActionListener {
 	private JButton btnReset;
 	private JPanel panel_3;
 	private JButton btnSalir;
+	private JButton btnRanking;
 	private JPanel panel_4;
 	private JPanel panel_5;
 	private JLabel victoriaODerrota;
@@ -112,6 +113,7 @@ public class PantallaFinal extends JFrame implements ActionListener {
 			panel_2.add(getBtnReset());
 			panel_2.add(getPanel_3());
 			panel_2.add(getBtnSalir());
+			panel_2.add(getBtnRanking());
 		}
 		return panel_2;
 	}
@@ -134,6 +136,13 @@ public class PantallaFinal extends JFrame implements ActionListener {
 			panel_3 = new JPanel();
 		}
 		return panel_3;
+	}
+	private JButton getBtnRanking() {
+		if (btnRanking == null) {
+			btnRanking = new JButton("Ranking");
+			btnRanking.addActionListener(this);
+		}
+		return btnRanking;
 	}
 	private JButton getBtnSalir() {
 		if (btnSalir == null) {
@@ -182,15 +191,21 @@ public class PantallaFinal extends JFrame implements ActionListener {
 		if (e.getSource().equals(btnReset)){
 			Partida.getMiPartida().reset();
 			this.setVisible(false);
+			Partida.getMiPartida().reset();
+			
+			
 		}
 		if (e.getSource().equals(btnSalir)){
 			if (JOptionPane.showConfirmDialog(rootPane, "¿Estas seguro de que quieres salir?") == 0){
 				System.exit(0);
 			}
 		}
-		if(e.getSource().equals(btnReset)) {
-			Partida p=Partida.getMiPartida();
-			p.reset();
+		
+		if (e.getSource().equals(btnRanking)) {
+			PantallaRanking r = new PantallaRanking();
+			r.setVisible(true);
+			
 		}
 	}
+	
 }
