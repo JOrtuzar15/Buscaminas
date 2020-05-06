@@ -100,53 +100,65 @@ public class Partida extends Observable{
 	private void expandir(int pX, int pY, int pClick){
 		
 
-					if(pX==0 && pY==0) {
-						this.clicar(pX+1, pY, pClick);
-						this.clicar(pX, pY+1, pClick);
-					}
-					else if(pX==0 && pY==this.tablero.dimY()-1) {
-						this.clicar(pX+1, pY, pClick);
-						this.clicar(pX, pY-1, pClick);
-					}
-					else if(pX==this.tablero.dimX()-1 && pY==0) {
-						this.clicar(pX-1, pY, pClick);
-						this.clicar(pX, pY+1, pClick);
-					}
-					else if(pX==this.tablero.dimX()-1 && pY==this.tablero.dimY()-1) {
-						this.clicar(pX, pY-1, pClick);
-						this.clicar(pX-1, pY, pClick);
-					}
-					else if(pX==0) {
-						this.clicar(pX, pY-1, pClick);
-						this.clicar(pX+1, pY, pClick);
-						this.clicar(pX, pY+1, pClick);
-					}
-					else if(pX==this.tablero.dimX()-1) {
-						this.clicar(pX, pY-1, pClick);
-						this.clicar(pX-1, pY, pClick);
-						this.clicar(pX, pY+1, pClick);
-					}
-					else if(pY==0) {
-						this.clicar(pX-1, pY, pClick);
-						this.clicar(pX, pY+1, pClick);
-						this.clicar(pX+1, pY, pClick);
-					}
-					else if(pY==this.tablero.dimY()-1) {
-						this.clicar(pX-1, pY, pClick);
-						this.clicar(pX, pY-1, pClick);
-						this.clicar(pX+1, pY, pClick);
-					}
-					else {
-						this.clicar(pX-1, pY-1, pClick);
-						this.clicar(pX-1, pY, pClick);
-						this.clicar(pX-1, pY+1, pClick);
-						this.clicar(pX, pY-1, pClick);
-						this.clicar(pX, pY+1, pClick);
-						this.clicar(pX+1, pY-1, pClick);
-						this.clicar(pX+1, pY, pClick);
-						this.clicar(pX+1, pY+1, pClick);
-					
-					}
+		if(pX==0 && pY==0) {
+			this.clicar(pX+1, pY, pClick);
+			this.clicar(pX, pY+1, pClick);
+			this.clicar(pX+1, pY+1, pClick);
+		}
+		else if(pX==0 && pY==this.tablero.dimY()-1) {
+			this.clicar(pX+1, pY, pClick);
+			this.clicar(pX, pY-1, pClick);
+			this.clicar(pX+1, pY-1, pClick);
+		}
+		else if(pX==this.tablero.dimX()-1 && pY==0) {
+			this.clicar(pX-1, pY, pClick);
+			this.clicar(pX, pY+1, pClick);
+			this.clicar(pX-1, pY+1, pClick);
+		}
+		else if(pX==this.tablero.dimX()-1 && pY==this.tablero.dimY()-1) {
+			this.clicar(pX, pY-1, pClick);
+			this.clicar(pX-1, pY, pClick);
+			this.clicar(pX-1, pY-1, pClick);
+		}
+		else if(pX==0) {
+			this.clicar(pX, pY-1, pClick);
+			this.clicar(pX+1, pY, pClick);
+			this.clicar(pX, pY+1, pClick);
+			this.clicar(pX+1, pY-1, pClick);
+			this.clicar(pX+1, pY+1, pClick);
+		}
+		else if(pX==this.tablero.dimX()-1) {
+			this.clicar(pX, pY-1, pClick);
+			this.clicar(pX-1, pY, pClick);
+			this.clicar(pX, pY+1, pClick);
+			this.clicar(pX-1, pY-1, pClick);
+			this.clicar(pX-1, pY+1, pClick);
+		}
+		else if(pY==0) {
+			this.clicar(pX-1, pY, pClick);
+			this.clicar(pX, pY+1, pClick);
+			this.clicar(pX+1, pY, pClick);
+			this.clicar(pX+1, pY+1, pClick);
+			this.clicar(pX-1, pY+1, pClick);
+		}
+		else if(pY==this.tablero.dimY()-1) {
+			this.clicar(pX-1, pY, pClick);
+			this.clicar(pX, pY-1, pClick);
+			this.clicar(pX+1, pY, pClick);
+			this.clicar(pX+1, pY-1, pClick);
+			this.clicar(pX-1, pY-1, pClick);
+		}
+		else {
+			this.clicar(pX-1, pY-1, pClick);
+			this.clicar(pX-1, pY, pClick);
+			this.clicar(pX-1, pY+1, pClick);
+			this.clicar(pX, pY-1, pClick);
+			this.clicar(pX, pY+1, pClick);
+			this.clicar(pX+1, pY-1, pClick);
+			this.clicar(pX+1, pY, pClick);
+			this.clicar(pX+1, pY+1, pClick);
+		
+		}
 				}
 				
 	
