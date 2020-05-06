@@ -157,15 +157,15 @@ public class InterfazTablero extends JFrame implements Observer {
 	public void mostrarCasilla(int x,int y){
 	    Botones[x][y].setText(elArray[x][y].toString());
 	   Botones[x][y].setEnabled(false);
-	 
-	    
-	 
 	 }
 
 	@Override
 	public void update(Observable o, Object arg) {
 		Coordenadas coordenadas =  (Coordenadas) arg;
-		if (coordenadas.res==10) {
+		if(arg==null) {
+			reset();
+		}
+		else if (coordenadas.res==10) {
 			System.out.println("10 entra");
 			 Botones[coordenadas.x][coordenadas.y].setIcon(null);
 			  //Mostrar casilla vacia
@@ -200,4 +200,12 @@ public class InterfazTablero extends JFrame implements Observer {
 		Partida.getMiPartida().añadirObserver(this);
 	}
 	
+	private void reset() {
+		setDimensiones();
+		this.panel_2=null;
+		this.panel_2=getPanel_2();
+	}
+	public String getDificultad() {
+		return this.dificultad;
+	}
 }

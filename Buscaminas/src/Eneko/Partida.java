@@ -45,13 +45,21 @@ public class Partida extends Observable{
 	
 	public void reset(){
 		this.tiempo = 0;
-		this.tablero.reset();	
+		this.tablero.reset();
+		InterfazTablero i=(InterfazTablero) listObservadores.get(0);
+		Iterator<Observer> itr=listObservadores.iterator();
+		while(itr.hasNext()) {
+			InterfazTablero o=(InterfazTablero) itr.next();
+			o.setVisible(false);
+		}
+		listObservadores=new ArrayList<Observer>();
+		listObservadores.add(new InterfazTablero(i.getDificultad()));
 	}
 	
 	public void clicar(int pX, int pY, int pClick){
 		System.out.println(pClick + "TIPO CLICK");
 		int res=this.tablero.clicar(pX,pY,pClick);
-		if (res == 11 && marcados == this.tablero.getAlto()) {
+		if (res == 11 && marcados == this.tablero.getAlto()-1) {
 			System.out.println("ENTRAAAAAAAAAAAAAA");
 			this.tablero.clicar(pX,pY,3);
 			res = 9;
@@ -72,7 +80,7 @@ public class Partida extends Observable{
 					marcados =  this.tablero.getAlto()-1;
 				}else {
 				marcados++;}
-				System.out.println(marcados + "marcados" + " " + this.tablero.getAlto() + "alto");
+				System.out.println(marcados + "marcados");
 				System.out.println("BOMBAS" + this.tablero.getAlto());
 			}
 			else if(res == 10 ) {
@@ -84,7 +92,7 @@ public class Partida extends Observable{
 				System.out.println(marcados + "marcados");
 			}
 			
-			if(res == 11 && marcados <= this.tablero.getAlto()) {
+			if(res == 11 && marcados < this.tablero.getAlto()) {
 				this.notify(d);
 			}
 			if (res != 11) {
@@ -94,71 +102,76 @@ public class Partida extends Observable{
 				this.terminar(true);}
 		}
 		
+		
+		
 	}
 	private void expandir(int pX, int pY, int pClick){
 		
-		if(pX==0 && pY==0) {
-			this.clicar(pX+1, pY, pClick);
-			this.clicar(pX, pY+1, pClick);
-			this.clicar(pX+1, pY+1, pClick);
-		}
-		else if(pX==0 && pY==this.tablero.dimY()-1) {
-			this.clicar(pX+1, pY, pClick);
-			this.clicar(pX, pY-1, pClick);
-			this.clicar(pX+1, pY-1, pClick);
-		}
-		else if(pX==this.tablero.dimX()-1 && pY==0) {
-			this.clicar(pX-1, pY, pClick);
-			this.clicar(pX, pY+1, pClick);
-			this.clicar(pX-1, pY+1, pClick);
-		}
-		else if(pX==this.tablero.dimX()-1 && pY==this.tablero.dimY()-1) {
-			this.clicar(pX, pY-1, pClick);
-			this.clicar(pX-1, pY, pClick);
-			this.clicar(pX-1, pY-1, pClick);
-		}
-		else if(pX==0) {
-			this.clicar(pX, pY-1, pClick);
-			this.clicar(pX+1, pY, pClick);
-			this.clicar(pX, pY+1, pClick);
-			this.clicar(pX+1, pY-1, pClick);
-			this.clicar(pX+1, pY+1, pClick);
-		}
-		else if(pX==this.tablero.dimX()-1) {
-			this.clicar(pX, pY-1, pClick);
-			this.clicar(pX-1, pY, pClick);
-			this.clicar(pX, pY+1, pClick);
-			this.clicar(pX-1, pY-1, pClick);
-			this.clicar(pX-1, pY+1, pClick);
-		}
-		else if(pY==0) {
-			this.clicar(pX-1, pY, pClick);
-			this.clicar(pX, pY+1, pClick);
-			this.clicar(pX+1, pY, pClick);
-			this.clicar(pX+1, pY+1, pClick);
-			this.clicar(pX-1, pY+1, pClick);
-		}
-		else if(pY==this.tablero.dimY()-1) {
-			this.clicar(pX-1, pY, pClick);
-			this.clicar(pX, pY-1, pClick);
-			this.clicar(pX+1, pY, pClick);
-			this.clicar(pX+1, pY-1, pClick);
-			this.clicar(pX-1, pY-1, pClick);
-		}
-		else {
-			this.clicar(pX-1, pY-1, pClick);
-			this.clicar(pX-1, pY, pClick);
-			this.clicar(pX-1, pY+1, pClick);
-			this.clicar(pX, pY-1, pClick);
-			this.clicar(pX, pY+1, pClick);
-			this.clicar(pX+1, pY-1, pClick);
-			this.clicar(pX+1, pY, pClick);
-			this.clicar(pX+1, pY+1, pClick);
-		
-		}
 
+					if(pX==0 && pY==0) {
+						this.clicar(pX+1, pY, pClick);
+						this.clicar(pX, pY+1, pClick);
+						this.clicar(pX+1, pY+1, pClick);
+					}
+					else if(pX==0 && pY==this.tablero.dimY()-1) {
+						this.clicar(pX+1, pY, pClick);
+						this.clicar(pX, pY-1, pClick);
+						this.clicar(pX+1, pY-1, pClick);
+					}
+					else if(pX==this.tablero.dimX()-1 && pY==0) {
+						this.clicar(pX-1, pY, pClick);
+						this.clicar(pX, pY+1, pClick);
+						this.clicar(pX-1, pY+1, pClick);
+					}
+					else if(pX==this.tablero.dimX()-1 && pY==this.tablero.dimY()-1) {
+						this.clicar(pX, pY-1, pClick);
+						this.clicar(pX-1, pY, pClick);
+						this.clicar(pX-1, pY-1, pClick);
+					}
+					else if(pX==0) {
+						this.clicar(pX, pY-1, pClick);
+						this.clicar(pX+1, pY, pClick);
+						this.clicar(pX, pY+1, pClick);
+						this.clicar(pX+1, pY-1, pClick);
+						this.clicar(pX+1, pY+1, pClick);
+					}
+					else if(pX==this.tablero.dimX()-1) {
+						this.clicar(pX, pY-1, pClick);
+						this.clicar(pX-1, pY, pClick);
+						this.clicar(pX, pY+1, pClick);
+						this.clicar(pX-1, pY-1, pClick);
+						this.clicar(pX-1, pY+1, pClick);
+					}
+					else if(pY==0) {
+						this.clicar(pX-1, pY, pClick);
+						this.clicar(pX, pY+1, pClick);
+						this.clicar(pX+1, pY, pClick);
+						this.clicar(pX+1, pY+1, pClick);
+						this.clicar(pX-1, pY+1, pClick);
+					}
+					else if(pY==this.tablero.dimY()-1) {
+						this.clicar(pX-1, pY, pClick);
+						this.clicar(pX, pY-1, pClick);
+						this.clicar(pX+1, pY, pClick);
+						this.clicar(pX+1, pY-1, pClick);
+						this.clicar(pX-1, pY-1, pClick);
+					}
+					else {
+						this.clicar(pX-1, pY-1, pClick);
+						this.clicar(pX-1, pY, pClick);
+						this.clicar(pX-1, pY+1, pClick);
+						this.clicar(pX, pY-1, pClick);
+						this.clicar(pX, pY+1, pClick);
+						this.clicar(pX+1, pY-1, pClick);
+						this.clicar(pX+1, pY, pClick);
+						this.clicar(pX+1, pY+1, pClick);
+					
+					}
 		
-	}
+					
+				}
+				
+	
 
 	
 	private void notify( Coordenadas d) {

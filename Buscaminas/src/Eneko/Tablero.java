@@ -12,7 +12,7 @@ public class Tablero {
 			 this.ancho= pAncho;
 			 this.alto = pAlto;
 			 this.matriz = new Casilla [pAncho][pAlto];
-			 this.generarCasillas(alto); //NUM BOMBAS
+			 this.generarCasillas(alto);
 			
 		 }
 		 
@@ -113,8 +113,8 @@ public class Tablero {
 
 
 		public void reset() {
-			
-			
+			this.matriz=new Casilla[ancho][alto];
+			generarCasillas(alto);
 		}
 		
 		public int dimX() {
