@@ -71,25 +71,18 @@ public class InterfazTablero extends JFrame implements Observer {
 		if (dificultad.equals("Facil")){
 			this.ancho=7;
 		    this.alto=10;
-		    Partida.getMiPartida().setTablero(new Tablero(alto,ancho));
-		    Botones = new JButton[alto][ancho];
-		    elArray = new Integer [alto][ancho];
-		  
+		    
 		}else if(dificultad.equals("Media")){
 			this.ancho=10;
 		    this.alto=15;
-		    Partida.getMiPartida().setTablero(new Tablero(alto,ancho));
-		    Botones = new JButton[alto][ancho];
-		    elArray = new Integer [alto][ancho];
-		  
+		    
 		}else{
 			this.ancho=12;
 		    this.alto=25;
-		    Partida.getMiPartida().setTablero(new Tablero(alto,ancho));
-		    Botones = new JButton[alto][ancho];
-		    elArray = new Integer [alto][ancho];
-		   
 		}
+		Partida.getMiPartida().setTablero(alto,ancho);
+	    Botones = new JButton[alto][ancho];
+	    elArray = new Integer [alto][ancho];
 		System.out.println(alto);
 	}
 	private JPanel getPanel() {
@@ -180,7 +173,7 @@ public class InterfazTablero extends JFrame implements Observer {
 		else if (coordenadas.res==11) {
 			System.out.println("11 entra");
 			 //Botones[coordenadas.x][coordenadas.y].setText("B");
-			 ImageIcon t = new ImageIcon("D:\\Descargas\\1.jpeg");
+			 ImageIcon t = new ImageIcon("1.jpeg");
 			 Botones[coordenadas.x][coordenadas.y].setIcon(t);
 			//Poner banderin en coordenadas especificadas
 		}

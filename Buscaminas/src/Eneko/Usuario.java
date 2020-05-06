@@ -1,3 +1,4 @@
+package Buscaminas;
 
 public class Usuario {
 	//atributos
