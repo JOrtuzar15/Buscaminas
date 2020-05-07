@@ -17,7 +17,7 @@ import java.awt.event.ActionEvent;
 import java.awt.Font;
 
 public class PantallaFinal extends JFrame implements ActionListener {
-
+	
 	private JPanel contentPane;
 	private JPanel panel;
 	private JPanel panel_1;

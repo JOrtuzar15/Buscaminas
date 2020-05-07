@@ -109,6 +109,7 @@ public class Ranking {
 	//mirar la posicion
 	//y añadir ordenado
 	public void annadirOrdenado(Usuario pUsuario){
+		//FALTA MIRAR SI ES EL MISMO USUARIO CAMBIARLE LA PUNTUACION Y NO AÑADIR EL MISMO NOMBRE
 		Usuario aux=null;
 		boolean salir=false;
 		int cont=0;
@@ -116,7 +117,7 @@ public class Ranking {
 		if (this.lista.size()==0){
 			this.annadirUsuario(pUsuario);
 			}
-		else
+		else {
 		
 		while (itr.hasNext() && !salir){
 			aux=itr.next();
@@ -128,6 +129,7 @@ public class Ranking {
 			
 		}
 		this.lista.add(cont, pUsuario);
+		}
 		escribirDatos();
 		}
 	}

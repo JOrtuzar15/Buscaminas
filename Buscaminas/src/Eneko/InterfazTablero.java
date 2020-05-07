@@ -3,6 +3,8 @@ package Buscaminas;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.EventQueue;
+import java.awt.Font;
+
 import javax.swing.JPanel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -21,7 +23,7 @@ import java.awt.Point;
  
 public class InterfazTablero extends JFrame implements Observer {
 	
-	
+	private cronometro c ;
 	private JPanel contentPane;
 	private JPanel panel;
 	private JLabel lblNewLabel;
@@ -33,10 +35,11 @@ public class InterfazTablero extends JFrame implements Observer {
 	private String dificultad;
 	
 	public InterfazTablero(String pdificultad) {
+		
+		c = new cronometro();
 		this.añadirmeObserver(); // Se anade esta interfaz a la lista de observadores en Partida
 		this.dificultad = pdificultad;
 		this.setDimensiones(); //Se crea la matriz de botones correspondiente a la dificultad escogida
-		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Crea la ventana para mostrar la matriz de botones
 		setBounds(100, 100, 635, 419);
 		contentPane = new JPanel();
@@ -61,6 +64,7 @@ public class InterfazTablero extends JFrame implements Observer {
 		gbc_panel_2.gridx = 0;
 		gbc_panel_2.gridy = 1;
 		contentPane.add(getPanel_2(), gbc_panel_2);
+		panel.add(c.tiempo);
 		
 		this.setVisible(true); //La ventana ahora se puede ver
 		
@@ -187,6 +191,8 @@ public class InterfazTablero extends JFrame implements Observer {
 		else if (coordenadas.res==-1) {
 			elArray[coordenadas.x][coordenadas.y]=coordenadas.res;
 			this.mostrarCasilla(coordenadas.x , coordenadas.y);
+			c.pararCrono();
+			Partida.getMiPartida().setPuntu(1000/(c.segundos + c.minutos));
 			//Has perdido
 			
 		}
@@ -210,4 +216,6 @@ public class InterfazTablero extends JFrame implements Observer {
 	public String getDificultad() {
 		return this.dificultad;
 	}
+	
+
 }

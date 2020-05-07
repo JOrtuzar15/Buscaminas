@@ -50,7 +50,7 @@ public class Partida extends Observable{
 		else {
 			pant=new PantallaFinal("Derrota",this.puntuacion);
 			System.out.println("entra final");
-			//CAMBIAR AÑADIR A RANKING + SACAR NOMBRE DE PANTALLA INICIAL + PUNTUACION DE FINAL
+			//CAMBIAR A VICTORIA
 			Ranking.getMiRanking().annadirOrdenado(new Usuario(this.nombre , this.puntuacion));
 		}
 		
