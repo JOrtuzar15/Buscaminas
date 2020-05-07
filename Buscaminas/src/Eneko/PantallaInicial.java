@@ -48,19 +48,7 @@ public class PantallaInicial extends JFrame implements ActionListener {
 
 
 	// HAY QUE QUITAR EL MAIN Y HACER LLAMADA A LA CONSTRUCTORA
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					PantallaInicial frame = Partida.getMiPartida().empezar();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
+	
 	public PantallaInicial() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);

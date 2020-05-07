@@ -11,12 +11,12 @@ public class Partida extends Observable{
 	private Tablero tablero;
 	private int marcados = 0;
 	private ArrayList <Observer> listObservadores ;
-	
+	private boolean acabado;
 	
 	private Partida(){ 
 		
 		this.tiempo = 0;
-		
+		this.acabado = false;
 		this.listObservadores = new ArrayList<Observer>();
 		
 		
@@ -57,6 +57,7 @@ public class Partida extends Observable{
 	}
 	
 	public void reset(){
+		this.acabado= false;
 		this.tiempo = 0;
 		this.tablero.reset();
 		InterfazTablero i=(InterfazTablero) listObservadores.get(0);
@@ -70,6 +71,7 @@ public class Partida extends Observable{
 	}
 	
 	public void clicar(int pX, int pY, int pClick){
+		if (acabado == false) {
 		System.out.println(pClick + "TIPO CLICK");
 		int res=this.tablero.clicar(pX,pY,pClick);
 		if (res == 11 && marcados == this.tablero.getAlto()) {
@@ -113,6 +115,7 @@ public class Partida extends Observable{
 			}
 			if (this.tablero.ganado()) {
 				this.terminar(true);}
+		}
 		}
 		
 	}
@@ -201,5 +204,7 @@ public class Partida extends Observable{
 	public Tablero getTablero() {
 		return this.tablero;
 	}
-	
+	public void setAcabado() {
+		this.acabado=true;
+	}
 }

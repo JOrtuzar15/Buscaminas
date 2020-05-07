@@ -170,7 +170,6 @@ public class InterfazTablero extends JFrame implements Observer {
 	   Botones[x][y].setEnabled(false);
 	 
 	    
-	 
 	 }
 
 	@Override
@@ -189,8 +188,10 @@ public class InterfazTablero extends JFrame implements Observer {
 			//Poner banderin en coordenadas especificadas
 		}
 		else if (coordenadas.res==-1) {
+			Partida.getMiPartida().setAcabado();
+			ImageIcon t = new ImageIcon("bomba.png");
 			elArray[coordenadas.x][coordenadas.y]=coordenadas.res;
-			this.mostrarCasilla(coordenadas.x , coordenadas.y);
+			Botones[coordenadas.x][coordenadas.y].setIcon(t);
 			c.pararCrono();
 			Partida.getMiPartida().setPuntu(1000/(c.segundos + c.minutos));
 			//Has perdido
