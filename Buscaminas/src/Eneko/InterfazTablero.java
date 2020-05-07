@@ -2,10 +2,13 @@ package Buscaminas;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.EventQueue;
 import java.awt.Font;
 
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -21,7 +24,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Insets;
 import java.awt.Point;
  
-public class InterfazTablero extends JFrame implements Observer {
+public class InterfazTablero extends JFrame implements Observer, ActionListener {
 	
 	private cronometro c ;
 	private JPanel contentPane;
@@ -33,6 +36,7 @@ public class InterfazTablero extends JFrame implements Observer {
 	public  JButton [][] Botones; //Matriz de botones
 	public  Integer [][] elArray; //Matriz de String subyacente a la matriz de botones
 	private String dificultad;
+	private JButton reset;
 	
 	public InterfazTablero(String pdificultad) {
 		
@@ -64,12 +68,31 @@ public class InterfazTablero extends JFrame implements Observer {
 		gbc_panel_2.gridx = 0;
 		gbc_panel_2.gridy = 1;
 		contentPane.add(getPanel_2(), gbc_panel_2);
+		panel.add(reset());
 		panel.add(c.tiempo);
+		
+		
 		
 		this.setVisible(true); //La ventana ahora se puede ver
 		
 	}
-	
+	private JButton reset() {
+		if (reset == null) {
+			reset = new JButton();
+			ImageIcon t = new ImageIcon("cocos.png");
+			reset.setIcon(t);
+			reset.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+			reset.addActionListener(this);
+			
+		}
+		return reset;
+	}
+public void actionPerformed(ActionEvent e) {
+		
+		if (e.getSource().equals(reset)){
+			Partida.getMiPartida().reset();
+			}
+		}
 	public void setDimensiones (){ //Establece las dimensiones de la matriz de JButtons teniendo en cuenta la dificultad
 		
 		if (dificultad.equals("Facil")){
@@ -105,7 +128,7 @@ public class InterfazTablero extends JFrame implements Observer {
 	}
 	private JLabel getLblNewLabel() {
 		if (lblNewLabel == null) {
-			lblNewLabel = new JLabel("BUSCAMINAS V1" );
+			lblNewLabel = new JLabel("BUSCAMINAS V1                  " );
 		}
 		return lblNewLabel;
 	}
