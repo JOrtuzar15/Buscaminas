@@ -216,23 +216,23 @@ public void actionPerformed(ActionEvent e) {
 			elArray[coordenadas.x][coordenadas.y]=coordenadas.res;
 			Botones[coordenadas.x][coordenadas.y].setIcon(t);
 			c.pararCrono();
-			Partida.getMiPartida().setPuntu(1000/(c.segundos + c.minutos));
 			//Has perdido
 			
 		}
 		else if (coordenadas.res==0){
-			
 			//Mostrar casilla vacia
 			Botones[coordenadas.x][coordenadas.y].setEnabled(false);
 			
 		}
 
 		else {
-			//
+			
 			elArray[coordenadas.x][coordenadas.y]=coordenadas.res;
 			this.mostrarCasilla(coordenadas.x, coordenadas.y);
 		}
+		Partida.getMiPartida().setPuntu(1000/(c.segundos + c.minutos));
 	}
+	
 	private void añadirmeObserver() {
 		Partida.getMiPartida().añadirObserver(this);
 	}

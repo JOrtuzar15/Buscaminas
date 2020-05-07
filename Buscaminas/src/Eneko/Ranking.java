@@ -60,7 +60,7 @@ public class Ranking {
 		int i = 0;
 		Usuario u=null;
 		Iterator<Usuario> itr=this.getIterador();
-		while (itr.hasNext()){
+		while (itr.hasNext() && i<10){
 			u=itr.next();
 			i++;
 			ranking=ranking+(i+ ". " + u.getNombre()+" "+u.getPuntuacion()+"\n");

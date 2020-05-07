@@ -12,9 +12,10 @@ public class Partida extends Observable{
 	private int marcados = 0;
 	private ArrayList <Observer> listObservadores ;
 	private boolean acabado;
+	private int cont;
 	
 	private Partida(){ 
-		
+		this.cont = 1;
 		this.tiempo = 0;
 		this.acabado = false;
 		this.listObservadores = new ArrayList<Observer>();
@@ -42,21 +43,22 @@ public class Partida extends Observable{
 	}
 	
 	private void terminar(boolean pB){
-		PantallaFinal pant;
+		
 		if (pB) {
-			pant=new PantallaFinal("Victoria",this.puntuacion);
-			
+			if (cont == 1) {
+			new PantallaFinal("Victoria",this.puntuacion);
+			Ranking.getMiRanking().annadirOrdenado(new Usuario(this.nombre , this.puntuacion));
+			cont++;
+			}
 		}
 		else {
-			pant=new PantallaFinal("Derrota",this.puntuacion);
-			System.out.println("entra final");
-			//CAMBIAR A VICTORIA
-			Ranking.getMiRanking().annadirOrdenado(new Usuario(this.nombre , this.puntuacion));
+			new PantallaFinal("Derrota",this.puntuacion);
 		}
 		
 	}
 	
 	public void reset(){
+		this.cont = 1;
 		this.acabado= false;
 		this.tiempo = 0;
 		this.tablero.reset();
@@ -75,7 +77,6 @@ public class Partida extends Observable{
 		System.out.println(pClick + "TIPO CLICK");
 		int res=this.tablero.clicar(pX,pY,pClick);
 		if (res == 11 && marcados == this.tablero.getAlto()) {
-			System.out.println("ENTRAAAAAAAAAAAAAA");
 			this.tablero.clicar(pX,pY,3);
 			res = 9;
 		}
