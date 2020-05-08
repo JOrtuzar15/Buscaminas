@@ -58,6 +58,7 @@ public class Partida extends Observable{
 	}
 	
 	public void reset(){
+		this.marcados=0;
 		this.cont = 1;
 		this.acabado= false;
 		this.tiempo = 0;
@@ -104,6 +105,7 @@ public class Partida extends Observable{
 					marcados = 0;
 				}
 				else {
+					System.out.println("reduce marcados");
 				marcados--;}
 				System.out.println(marcados + "marcados");
 			}

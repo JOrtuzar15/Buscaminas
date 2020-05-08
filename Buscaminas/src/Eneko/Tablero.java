@@ -12,7 +12,7 @@ public class Tablero {
 			 this.ancho= pAncho;
 			 this.alto = pAlto;
 			 this.matriz = new Casilla [pAncho][pAlto];
-			 this.generarCasillas(1);
+			 this.generarCasillas(alto);
 			
 		 }
 		 
