@@ -187,7 +187,6 @@ public class PantallaFinal extends JFrame implements ActionListener {
 		return panel_9;
 	}
 	public void actionPerformed(ActionEvent e) {
-		System.out.println(puntos);
 		if (e.getSource().equals(btnReset)){
 			Partida.getMiPartida().reset();
 			this.setVisible(false);

@@ -14,7 +14,7 @@ public class Partida extends Observable{
 	private boolean acabado;
 	private int cont;
 	
-	private Partida(){ 
+	private Partida(){  //Inicializa el contador de banderas, el tiempo, crea la lista de observers y se declara como no acabado
 		this.cont = 1;
 		this.tiempo = 0;
 		this.acabado = false;
@@ -30,19 +30,19 @@ public class Partida extends Observable{
 		return miPartida;
 		}
  
-	public PantallaInicial empezar() {
+	public PantallaInicial empezar() { //Crea una nueva pantalla inicial
 		 p = new PantallaInicial();
 		 return p;
 		
 	}
-	public void setNombre(String pnombre) {
+	public void setNombre(String pnombre) {//Establece el nombre del jugador
 		this.nombre = pnombre;
 	}
-	public void setPuntu(int ppuntu) {
+	public void setPuntu(int ppuntu) {//Establece la puntuacion del jugador
 		this.puntuacion = ppuntu;
 	}
 	
-	private void terminar(boolean pB){
+	private void terminar(boolean pB){//pB indica si la partida se ha ganado o no
 		
 		if (pB) {
 			if (cont == 1) {
@@ -57,7 +57,8 @@ public class Partida extends Observable{
 		
 	}
 	
-	public void reset(){
+	public void reset(){//Devuelve los valores basicos a su estado por defecto, vacia y llena la lista de observers y pone el tablero a null
+						//para que al siguiente click se genere uno nuevo al llamar a setTablero desde InterfazTablero
 		this.marcados=0;
 		this.cont = 1;
 		this.acabado= false;
@@ -75,36 +76,34 @@ public class Partida extends Observable{
 	
 	public void clicar(int pX, int pY, int pClick){
 		if (acabado == false) {
-		int res=this.tablero.clicar(pX,pY,pClick);
+		int res=this.tablero.clicar(pX,pY,pClick);//Pasa la llamada a la clase tablero y recoge el output
 		if (res == 11 && marcados == this.tablero.getAlto()) {
 			this.tablero.clicar(pX,pY,3);
 			res = 9;
 		}
-		if((res != 9)) {
+		if((res != 9)) {//9 es el codigo de inaccion
 			Coordenadas d = new Coordenadas(res , pX ,pY);
 			
-			if (res==0) {
+			if (res==0) {//No hay ninguna bomba en un cuadrado de 3x3
 			this.expandir(pX, pY, pClick);
 			}
 				
-			else if(res==-1) {
+			else if(res==-1) {//La casilla clicada es bomba
 				this.notify(d);
 				this.terminar(false);
 			}
-			else if(res == 11) {
-				if (marcados >  this.tablero.getAlto()) {
-					marcados =  this.tablero.getAlto()-1;
-				}else {
-				marcados++;}
+			else if(res == 11 && marcados <= this.tablero.getAlto()) {//Se pone banderin
+				marcados++;
 			}
-			else if(res == 10 ) {
-				if (marcados < 0) {
+			else if(res == 10 ) {//Se quita banderin
+				if (marcados <= 0) {
 					marcados = 0;
 				}
 				else {
 				marcados--;}
 			}
 			
+			//Se notifica de las operaciones realizadas a la interfaz grafica
 			if(res == 11 && marcados <= this.tablero.getAlto()) {
 				this.notify(d);
 			}
@@ -117,7 +116,7 @@ public class Partida extends Observable{
 		}
 		
 	}
-	private void expandir(int pX, int pY, int pClick){
+	private void expandir(int pX, int pY, int pClick){//Desvela recursivamente casillas hasta encontrar la frontera con alguna bomba
 		
 		if(pX==0 && pY==0) {
 			this.clicar(pX+1, pY, pClick);
@@ -184,7 +183,6 @@ public class Partida extends Observable{
 
 	
 	private void notify( Coordenadas d) {
-		System.out.println(this.listObservadores.size());
 		Iterator<Observer> it = this.listObservadores.iterator();
 	
 		
@@ -193,7 +191,8 @@ public class Partida extends Observable{
 			o.update(this, d);
 		}
 	}
-	public void setTablero(int pAncho, int pAlto, int pX, int pY) {
+	public void setTablero(int pAncho, int pAlto, int pX, int pY) {//Llamado en cada click, se activa solo cuando el tablero es null,
+		//generando un nuevo tablero con una nueva distribucion
 		if (this.tablero==null) {
 			this.tablero = new Tablero(pAncho, pAlto, pX, pY);
 		}
@@ -204,7 +203,7 @@ public class Partida extends Observable{
 	public Tablero getTablero() {
 		return this.tablero;
 	}
-	public void setAcabado() {
+	public void setAcabado() {//Para que no se pueda seguir clicando una vez terminado el juego
 		this.acabado=true;
 	}
 }

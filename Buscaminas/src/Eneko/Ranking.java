@@ -95,7 +95,6 @@ public class Ranking {
             	int puntuacion = Integer.parseInt(lineaSeparada[1]);
             	Usuario u = new Usuario(usuario , puntuacion);
             	this.lista.add(u);
-            	System.out.println("Leyendo...");
 			}
             scanner.close();
             }

@@ -107,7 +107,6 @@ public void actionPerformed(ActionEvent e) {
 		}
 	    Botones = new JButton[alto][ancho];
 	    elArray = new Integer [alto][ancho];
-		System.out.println(alto);
 	}
 	private JPanel getPanel() {
 		if (panel == null) {
@@ -127,7 +126,6 @@ public void actionPerformed(ActionEvent e) {
 			panel_2 = new JPanel();
 			panel_2.setLayout(new GridLayout(alto, ancho, 0, 0));
 		}
-		System.out.println(alto);
 		for(int x =0; x<alto; x++){
 			for(int y=0 ; y<ancho; y++){
 			JButton but = new JButton();
@@ -141,7 +139,6 @@ public void actionPerformed(ActionEvent e) {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					
-					System.out.println(e.getButton());
 				    Partida.getMiPartida().setTablero(alto,ancho,x1,y1);
 					if (e.getButton()==1) {
 						Partida.getMiPartida().clicar(x1,y1,1);
@@ -191,12 +188,10 @@ public void actionPerformed(ActionEvent e) {
 	public void update(Observable o, Object arg) {
 		Coordenadas coordenadas =  (Coordenadas) arg;
 		if (coordenadas.res==10) {
-			System.out.println("10 entra");
 			 Botones[coordenadas.x][coordenadas.y].setIcon(null);
 			  //Mostrar casilla vacia
 		}
 		else if (coordenadas.res==11) {
-			System.out.println("11 entra");
 			 //Botones[coordenadas.x][coordenadas.y].setText("B");
 			 ImageIcon t = new ImageIcon("1.jpeg");
 			 Botones[coordenadas.x][coordenadas.y].setIcon(t);
