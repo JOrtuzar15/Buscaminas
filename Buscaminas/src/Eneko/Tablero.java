@@ -8,37 +8,40 @@ public class Tablero {
 		 private int alto;
 		 private int dificultad;
 		 
-		 public Tablero(int pAncho ,int pAlto) {
+		 public Tablero(int pAncho ,int pAlto, int pX, int pY) {
 			 this.ancho= pAncho;
 			 this.alto = pAlto;
 			 this.matriz = new Casilla [pAncho][pAlto];
-			 this.generarCasillas(alto);
+			 this.generarCasillas(alto, pX, pY);
 			
 		 }
 		 
 		public int getAlto() {
 			return this.alto;
 		}
-		 public void generarCasillas (int numBombas) {
+		 public void generarCasillas (int numBombas, int pX, int pY) {
 			 for(int h = 0 ; h<numBombas ; h++) {
-				 this.generarBomba();
+				 this.generarBomba(pX, pY);
 			 }
 			 
 			 this.rellenar();
 			 this.comprobar();
 		 }
-		 private void generarBomba() {
+		 private void generarBomba(int px, int py) {
 			 int i = (int) Math.floor(Math.random()*(ancho)+0);
 			 int z = (int) Math.floor(Math.random()*(alto)+0);
 			 
 			 
-			 if(z>=0 && i>=0 && z<alto && i<ancho) {
+			 if(z>=0 && i>=0 && z<alto && i<ancho && ((i!=px-1 && z!=py-1)&&(i!=px-1 && z!=py)&&(i!=px-1 && z!=py+1)&&(i!=px && z!=py-1)&&(i!=px && z!=py)&&(i!=px && z!=py+1)&&(i!=px+1 && z!=py-1)&&(i!=px+1 && z!=py)&&(i!=px+1 && z!=py+1))) {
 				 if(matriz[i][z]==null) {
 					 matriz[i][z] = new Casilla(-1);}
 				 else {
-					 this.generarBomba();
+					 this.generarBomba(px,py);
 				 }
-			 } 
+			 }
+			 else {
+				 this.generarBomba(px,py);
+			 }
 				 
 		 }
 		
@@ -58,8 +61,6 @@ public class Tablero {
 			        
 			       if (matriz[i][z].getInfoCasilla() == -1){
 			        if  (z>=0 && i>=0 && z<alto && i<ancho){
-			        	
-			           System.out.println(i+ " "+ z +" "+ ancho +" " +alto);
 			           
 			           		if ((z-1>=0) &&  matriz[i][z-1].getInfoCasilla() != -1){
 			                  matriz[i][z-1].incrementar();
@@ -99,8 +100,6 @@ public class Tablero {
 		 }
 		 
 		 public int clicar(int x, int y , int click) {
-			System.out.println(x);
-			System.out.println(y);
 			Casilla c = this.matriz[x][y];
 			if(click == 1) {
 				return c.clickIzq();
@@ -110,12 +109,6 @@ public class Tablero {
 			}
 			 				 
 		 }
-
-
-		public void reset() {
-			this.matriz=new Casilla[ancho][alto];
-			generarCasillas(alto);
-		}
 		
 		public int dimX() {
 			return this.ancho;

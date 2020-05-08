@@ -98,25 +98,15 @@ public void actionPerformed(ActionEvent e) {
 		if (dificultad.equals("Facil")){
 			this.ancho=7;
 		    this.alto=10;
-		    Partida.getMiPartida().setTablero(new Tablero(alto,ancho));
-		    Botones = new JButton[alto][ancho];
-		    elArray = new Integer [alto][ancho];
-		  
 		}else if(dificultad.equals("Media")){
 			this.ancho=10;
 		    this.alto=15;
-		    Partida.getMiPartida().setTablero(new Tablero(alto,ancho));
-		    Botones = new JButton[alto][ancho];
-		    elArray = new Integer [alto][ancho];
-		  
 		}else{
 			this.ancho=12;
 		    this.alto=25;
-		    Partida.getMiPartida().setTablero(new Tablero(alto,ancho));
-		    Botones = new JButton[alto][ancho];
-		    elArray = new Integer [alto][ancho];
-		   
 		}
+	    Botones = new JButton[alto][ancho];
+	    elArray = new Integer [alto][ancho];
 		System.out.println(alto);
 	}
 	private JPanel getPanel() {
@@ -147,10 +137,12 @@ public void actionPerformed(ActionEvent e) {
 			Integer y1 = y;
 			Botones[x][y].addMouseListener(new MouseListener() {
 
+
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					
-					System.out.println(e.getButton());	
+					System.out.println(e.getButton());
+				    Partida.getMiPartida().setTablero(alto,ancho,x1,y1);
 					if (e.getButton()==1) {
 						Partida.getMiPartida().clicar(x1,y1,1);
   				  	}

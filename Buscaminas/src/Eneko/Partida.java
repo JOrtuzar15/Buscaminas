@@ -62,7 +62,7 @@ public class Partida extends Observable{
 		this.cont = 1;
 		this.acabado= false;
 		this.tiempo = 0;
-		this.tablero.reset();
+		this.tablero=null;
 		InterfazTablero i=(InterfazTablero) listObservadores.get(0);
 		Iterator<Observer> itr=listObservadores.iterator();
 		while(itr.hasNext()) {
@@ -75,7 +75,6 @@ public class Partida extends Observable{
 	
 	public void clicar(int pX, int pY, int pClick){
 		if (acabado == false) {
-		System.out.println(pClick + "TIPO CLICK");
 		int res=this.tablero.clicar(pX,pY,pClick);
 		if (res == 11 && marcados == this.tablero.getAlto()) {
 			this.tablero.clicar(pX,pY,3);
@@ -97,17 +96,13 @@ public class Partida extends Observable{
 					marcados =  this.tablero.getAlto()-1;
 				}else {
 				marcados++;}
-				System.out.println(marcados + "marcados" + " " + this.tablero.getAlto() + "alto");
-				System.out.println("BOMBAS" + this.tablero.getAlto());
 			}
 			else if(res == 10 ) {
 				if (marcados < 0) {
 					marcados = 0;
 				}
 				else {
-					System.out.println("reduce marcados");
 				marcados--;}
-				System.out.println(marcados + "marcados");
 			}
 			
 			if(res == 11 && marcados <= this.tablero.getAlto()) {
@@ -198,8 +193,10 @@ public class Partida extends Observable{
 			o.update(this, d);
 		}
 	}
-	public void setTablero(Tablero pTablero) {
-		this.tablero = pTablero;
+	public void setTablero(int pAncho, int pAlto, int pX, int pY) {
+		if (this.tablero==null) {
+			this.tablero = new Tablero(pAncho, pAlto, pX, pY);
+		}
 	}
 	public void añadirObserver(Observer o) {
 		this.listObservadores.add(o);

@@ -188,17 +188,14 @@ public class PantallaInicial extends JFrame implements ActionListener {
 				if (rdbtnFacil.isSelected() && e.getSource().equals(btnJugar)){
 					this.setVisible(false);
 					dificultad = "Facil";
-					System.out.println("Dificultad elegida FACIL");
 					InterfazTablero t = new InterfazTablero(dificultad);
 				}else if(rdbtnMedio.isSelected() && e.getSource().equals(btnJugar)){
 					this.setVisible(false);
 					dificultad = "Media";
-					System.out.println("Dificultad elegida MEDIA");
 					InterfazTablero t = new InterfazTablero(dificultad);
 				}else if(rdbtnAvanzado.isSelected() && e.getSource().equals(btnJugar)){
 					this.setVisible(false);
 					dificultad = "Avanzada";
-					System.out.println("Dificultad elegida AVANZADA");
 					InterfazTablero t = new InterfazTablero(dificultad);
 					}
 				
@@ -224,7 +221,6 @@ public class PantallaInicial extends JFrame implements ActionListener {
 	}
 	
 	public String getNombreJugador(){
-		System.out.println(getTextField().getText());
 		return getTextField().getText();
 	}
 	
